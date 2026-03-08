@@ -1,0 +1,30 @@
+.text-primario {
+    color: #EFA67D;
+}
+.text-secundario {
+    color: #DCE3DA;
+}
+.bg-primario {
+    background-color: #EFA67D;
+}
+.bg-secundario {
+    background-color: #DCE3DA;
+}
+.bg-ira{
+    background-color: #FFB9BA;
+}
+.bg-asco{
+    background-color: #C8FDDE;
+}
+.bg-tristeza{
+    background-color: #e1cbff;
+}
+.bg-felicidad{
+    background-color: #F7CC92;
+}
+.bg-sorpresa{
+    background-color: #FEFFB8;
+}
+.bg-miedo{
+    background-color: #DBDBDB;
+}

@@ -1,0 +1,24 @@
+import { Routes, Route } from 'react-router-dom'
+import Login from './components/pages/login/Login'
+import Error from './components/pages/error/Error'
+import Home from './components/pages/home/Home'
+import Body_home from './components/pages/home/Body_home'
+import Registrar_emocion from './components/pages/emotion_register/Registrar_emocion'
+
+function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<Login form = 'login'/>} />
+      <Route path="/register" element={<Login form = 'register' />} />
+      <Route path="/sensia" element={<Home />} >
+        {/* Aquí van las rutas hijas de Home */}
+        <Route index element={<Body_home />} />
+        <Route path='registrar_emocion' element={<Registrar_emocion />} />
+      </Route>
+      <Route path="/error" element={<Error />} />
+      <Route path="*" element={<Error />} />
+    </Routes>
+  )
+}
+
+export default App

@@ -1,0 +1,130 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: apparel;
+  src: url(./assets/typo/Apparel/Apparel\ Display\ Light.ttf);
+}
+
+@font-face {
+  font-family: canela;
+  src: url(./assets/typo/Canela/Canela-Light-Trial.otf);
+}
+
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  /* font-family: canela; */
+  letter-spacing: 0.3px;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* --rosa: #FDCAE1;
+  --secundario: #32ce73; */
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+
+a:hover {
+  color: #535bf2;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+
+button:hover {
+  border-color: #646cff;
+}
+
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+
+  a:hover {
+    color: #747bff;
+  }
+
+  button {
+    background-color: #f9f9f9;
+  }
+}
+
+.arcoiris {
+  background: radial-gradient(circle,
+      rgba(255, 255, 255, 0.722), 
+      rgba(255, 179, 153, 0.79),
+      rgba(255, 255, 255, 0.707));
+  animation: girarColor 20s ease-in-out infinite alternate;
+}
+
+@keyframes girarColor {
+  0% {
+    filter: hue-rotate(0deg);
+    top: -100vh;
+    left: -100vw;
+  }
+
+  25% {
+    filter: hue-rotate(120deg);
+    top: -50vh;
+    left: -50vw;
+  }
+  50% {
+    filter: hue-rotate(240deg);
+    top: 0;
+    left: 0;
+  }
+  75% {
+    filter: hue-rotate(300deg);
+    top: -50vh;
+    left: -50vw;
+  }
+
+  100% {
+    filter: hue-rotate(360deg);
+    top: -100vh;
+    left: -100vw;
+    /* Solo gira un poco */
+  }
+}
