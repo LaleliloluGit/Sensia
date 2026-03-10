@@ -5,6 +5,7 @@ import argon2 from "argon2";
 import {
   getUsuarios,
   getUsuarioByUsername,
+  getUsuarioByEmail,
   createUsuario,
   deleteUsuarioById,
 } from "../database/models/usuariosModel.js";
@@ -29,6 +30,19 @@ export async function getUsuarioByUsernameController(req, res) {
     res.json(usuario);
   } catch (err) {
     console.error("Error al obtener el usuario por username:", err);
+    res.status(500).json({ error: "Error al obtener el usuario" });
+  }
+}
+export async function getUsuarioByEmailController(req, res) {
+  try {
+    const { email } = req.params;
+    const usuario = await getUsuarioByEmail(email);
+    if (!usuario) {
+      return res.status(404).json({ error: "Usuario no encontrado" });
+    }
+    res.json(usuario);
+  } catch (err) {
+    console.error("Error al obtener el usuario por email:", err);
     res.status(500).json({ error: "Error al obtener el usuario" });
   }
 }
@@ -71,27 +85,54 @@ export async function loginUsuarioController(req, res) {
 export async function createUsuarioController(req, res) {
   try {
     const { nombre, apellido1, apellido2, username, email, password } = req.body;
-    
+
+    // Validación básica
     if (!nombre || !apellido1 || !username || !email || !password) {
-      return res.status(400).json({ error: "Faltan campos requeridos" });
+      return res.status(400).json({
+        error: "Faltan campos obligatorios",
+      });
     }
 
+    // Buscar usuario y email en paralelo
+    const [existingUserByUsername, existingUserByEmail] = await Promise.all([
+      getUsuarioByUsername(username),
+      getUsuarioByEmail(email),
+    ]);
+
+    if (existingUserByUsername) {
+      return res.status(400).json({
+        error: "El nombre de usuario ya está en uso",
+      });
+    }
+
+    if (existingUserByEmail) {
+      return res.status(400).json({
+        error: "El correo electrónico ya está en uso",
+      });
+    }
+
+    // Hash de contraseña
     const passwordHashed = await argon2.hash(password);
 
+    // Crear usuario
     const newUsuario = await createUsuario({
       nombre,
       apellido1,
-      apellido2: apellido2 || '',
+      apellido2,
       username,
       email,
       password: passwordHashed,
-  });
-    res.status(201).json({ message: "Usuario creado", usuario: newUsuario });
-  } catch (err) {
+    });
 
+    return res.status(201).json({
+      message: "Usuario creado",
+      usuario: newUsuario,
+    });
+
+  } catch (err) {
     console.error("🔥 ERROR REAL:", err);
-    
-    res.status(500).json({
+
+    return res.status(500).json({
       error: "Error al crear el usuario",
       detalle: err.message,
     });

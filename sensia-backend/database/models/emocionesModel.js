@@ -26,7 +26,6 @@ export async function createEmocion(
   definicion,
   situaciones,
   sintomas,
-  funciones,
   pensamientos,
   expresiones,
   necesidades,

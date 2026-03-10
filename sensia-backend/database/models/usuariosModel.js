@@ -10,6 +10,11 @@ export async function getUsuarioByUsername(username) {
     return rows[0];
 }
 
+export async function getUsuarioByEmail(email) {
+    const [rows] = await db.execute("SELECT * FROM usuarios WHERE email = ?", [email]);
+    return rows[0];
+}
+
 export async function createUsuario(usuarioData) {
   console.log(usuarioData)
   const { nombre, apellido1, apellido2, username, email, password } = usuarioData; // ajusta los campos según tu tabla

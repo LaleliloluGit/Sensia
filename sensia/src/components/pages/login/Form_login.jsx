@@ -19,51 +19,40 @@ function Form_login() {
         const { name, value } = e.target;
         setFormData(prev => ({ ...prev, [name]: value }));
         setCampoError(prev => ({
-        ...prev,
-        [name]: ""
-    }));
+            ...prev,
+            [name]: ""
+        }));
 
-    setError("");
+        setError("");
     };
 
     const validateAllFields = async () => {
         const newErrors = {};
 
         for (const [key, value] of Object.entries(formData)) {
-            const error = await validateField(key, value);
+            const error = validateField(value);
+
             if (error) {
                 newErrors[key] = error;
+                setCampoError(newErrors);
+                return false; // 🔴 se detiene aquí
             }
         }
 
-        setCampoError(newErrors);
-        return Object.keys(newErrors).length === 0;
+        setCampoError({});
+        return true;
     };
 
-    // const checkRepeatValue = async (field, value) => {
-    //     try {
-    //         const response = await fetch(`http://localhost:3000/sensia/usuarios/username/${value}`);
-    //         const data = await response.json();
-    //         return data.exists;
-    //     } catch (error) {
-    //         console.error(`Error checking ${field}:`, error);
-    //         return false;
-    //     }
-    // };
-
-    const validateField = (name, value) => {
-
-        if (!value.trim()) return 'Este campo es obligatorio';
-
+    const validateField = (value) => {
+        if (!value.trim()) return "Este campo es obligatorio";
         return "";
-
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        // Validar todos los campos antes de enviar
         const isValid = await validateAllFields();
-
         if (!isValid) return;
 
         try {
@@ -122,9 +111,9 @@ function Form_login() {
                 </div>
                 <div className="login_register_buttons login_register_inputs">
                     <button type="submit">Acceder</button>
-                    <Link to="/register" className="register_link">Go to Register</Link>
+                    <Link to="/register" className="button">Go to Register</Link>
                 </div>
-            {error && <p className="text-red-600 col-span-2 text-center mt-2">{error}</p>}
+                {error && <p className="text-red-600 col-span-2 text-center mt-2">{error}</p>}
             </form>
 
         </>
