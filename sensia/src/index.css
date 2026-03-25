@@ -10,15 +10,33 @@
   src: url(./assets/typo/Canela/Canela-Light-Trial.otf);
 }
 
+@font-face {
+  font-family: cinzel;
+  src: url(./assets/typo/cinzel/Cinzel-Regular.otf);
+}
+@font-face {
+  font-family: newyork;
+  src: url(./assets/typo/newyork/NewYork.otf);
+}
+@font-face {
+  font-family: denova;
+  src: url(./assets/typo/denova/DENOVA-Regular.otf);
+}
+@font-face {
+  font-family: belgiano;
+  src: url(./assets/typo/belgiano/Belgiano\ Serif\ 2.otf);
+}
+
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  /* font-family: canela; */
+  font-family: belgiano;
   letter-spacing: 0.3px;
   line-height: 1.5;
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
+  /* color: rgba(255, 255, 255, 0.87); */
+  color: #213547;
   background-color: #242424;
 
   font-synthesis: none;

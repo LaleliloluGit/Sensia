@@ -18,6 +18,22 @@ export async function getNivelesAlexithimiaController(req, res) {
   }
 }
 
+export async function getNivelAlexithimiaByPuntuacionController(req, res) {
+  try {
+    const { puntuacion } = req.params;
+    const niveles = await getNivelesAlexithimia();
+    const nivelEncontrado = niveles.find(nivel => puntuacion >= nivel.rango_minimo && puntuacion <= nivel.rango_maximo);
+    if (nivelEncontrado) {
+      res.json(nivelEncontrado);
+    } else {
+      res.status(404).json({ error: "No se encontró un nivel de alexithimia para la puntuación dada" });
+    }
+  } catch (err) {
+    console.error("Error al obtener el nivel de alexithimia por puntuación:", err);
+    res.status(500).json({ error: "Error al obtener el nivel de alexithimia por puntuación" });
+  }
+}
+
 export async function createNivelAlexithimiaController(req, res) {
   try {
     const { nivel, descripcion, rango_minimo, rango_maximo } = req.body;

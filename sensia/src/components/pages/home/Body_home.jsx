@@ -11,6 +11,9 @@ function Body_home() {
       <Link to="./registrar_emocion" className="col-span-12 border-2 border-pink-500 relative h-min">
         <p>Enlace a registro de Emociones</p><br/>
       </Link>
+      <Link to="./alexithimia_test" className="col-span-12 border-2 border-pink-500 relative h-min">
+        <p>Enlace a realizar test de alexithimia</p><br/>
+      </Link>
     </div>
   )
 }

@@ -9,14 +9,13 @@ export async function createRegistroTest(
   usuario_id,
   respuestas,
   puntuacion_total,
-  niveles_alexithimia,
-  fecha_hora,
+  nivel_alexithimia,
 ) {
   const [result] = await db.execute(
-    "INSERT INTO registros_test (usuario_id, respuestas, puntuacion_total, niveles_alexithimia, fecha_hora) VALUES (?, ?, ?, ?, ?)",
-    [usuario_id, respuestas, puntuacion_total, niveles_alexithimia, fecha_hora],
+    "INSERT INTO registros_test (usuario_id, respuestas, puntuacion_total, nivel_alexithimia) VALUES (?, ?, ?, ?)",
+    [usuario_id, respuestas, puntuacion_total, nivel_alexithimia],
   );
-  return { id: result.insertId, usuario_id, respuestas, puntuacion_total, niveles_alexithimia, fecha_hora };
+  return { id: result.insertId, usuario_id, respuestas, puntuacion_total, nivel_alexithimia };
 }
 
 export async function deleteRegistroTestById(id) {

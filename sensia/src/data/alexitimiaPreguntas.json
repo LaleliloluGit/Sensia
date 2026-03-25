@@ -1,0 +1,22 @@
+[
+  { "id": 1, "texto": "Me cuesta encontrar las palabras adecuadas para describir cómo me siento." },
+  { "id": 2, "texto": "A menudo no sé si lo que siento es tristeza, enfado o ansiedad." },
+  { "id": 3, "texto": "Prefiero hablar de hechos concretos antes que de emociones." },
+  { "id": 4, "texto": "Me resulta difícil explicar a otras personas lo que siento." },
+  { "id": 5, "texto": "Cuando noto sensaciones en mi cuerpo, me cuesta saber qué emoción las provoca." },
+  { "id": 6, "texto": "A menudo tengo sentimientos que no sé identificar con claridad." },
+  { "id": 7, "texto": "Me cuesta describir mis emociones incluso a personas cercanas." },
+  { "id": 8, "texto": "Prefiero centrarme en lo que pasa a mi alrededor más que en lo que siento por dentro." },
+  { "id": 9, "texto": "Cuando estoy alterado/a emocionalmente, me cuesta saber exactamente qué siento." },
+  { "id": 10, "texto": "Me cuesta poner en palabras mis emociones." },
+  { "id": 11, "texto": "A menudo me concentro en detalles externos más que en mis sentimientos." },
+  { "id": 12, "texto": "Me resulta difícil identificar mis propias emociones." },
+  { "id": 13, "texto": "Prefiero analizar situaciones de forma lógica antes que pensar en cómo me hacen sentir." },
+  { "id": 14, "texto": "Me cuesta reconocer qué emoción estoy experimentando." },
+  { "id": 15, "texto": "A veces siento algo en mi interior pero no sé exactamente qué emoción es." },
+  { "id": 16, "texto": "Prefiero mantener mis emociones para mí en lugar de expresarlas." },
+  { "id": 17, "texto": "Me cuesta explicar mis sentimientos a otras personas." },
+  { "id": 18, "texto": "Suelo prestar poca atención a mis propias emociones." },
+  { "id": 19, "texto": "Me resulta difícil entender por qué me siento como me siento." },
+  { "id": 20, "texto": "Prefiero centrarme en hechos y actividades antes que reflexionar sobre emociones." }
+]

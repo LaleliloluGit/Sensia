@@ -19,20 +19,19 @@ export async function getRegistrosTestsController(req, res) {
 }
 
 export async function createRegistroTestController(req, res) {
+  console.log(req.body);
   try {
     const {
       usuario_id,
       respuestas,
       puntuacion_total,
-      niveles_alexithimia,
-      fecha_hora,
+      nivel_alexithimia,
     } = req.body;
     if (
       !usuario_id ||
       !respuestas ||
       !puntuacion_total ||
-      !niveles_alexithimia ||
-      !fecha_hora
+      !nivel_alexithimia
     ) {
       return res.status(400).json({ error: "Faltan campos requeridos" });
     }
@@ -40,8 +39,7 @@ export async function createRegistroTestController(req, res) {
       usuario_id,
       respuestas,
       puntuacion_total,
-      niveles_alexithimia,
-      fecha_hora,
+      nivel_alexithimia,
     );
     res.status(201).json({
       message: "Registro test creado",
