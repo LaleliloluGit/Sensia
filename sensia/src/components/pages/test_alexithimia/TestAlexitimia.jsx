@@ -166,7 +166,7 @@ export default function TestAlexitimia() {
   }
 
   return (
-    <div className="z-10 w-screen grid grid-cols-12 relative top-24 px-8">
+    <div className="z-10 w-screen grid grid-cols-12 relative mt-10 px-8 max-w-7xl mx-auto">
       <h2 className="col-span-12 text-center text-4xl font-bold mb-6">
         Test de Alexitimia
       </h2>

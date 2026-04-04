@@ -9,7 +9,7 @@ export default function ResultadoTest() {
 
   if (!nivelAlexitimia) {
     return (
-      <div className="z-10 w-screen grid grid-cols-12 relative mt-24 px-6 md:px-8">
+      <div className="z-10 w-screen grid grid-cols-12 relative px-6 md:px-8">
         <div className="col-span-12 max-w-4xl mx-auto w-full bg-[#ffffffbb] rounded-2xl shadow-lg border border-gray-200 px-6 py-10 text-center">
           <h2 className="text-3xl font-bold mb-4">Resultado no disponible</h2>
           <p className="text-lg text-gray-700 mb-6">
@@ -28,12 +28,12 @@ export default function ResultadoTest() {
   }
 
   return (
-    <div className="z-10 w-screen grid grid-cols-12 relative mt-24 px-6 md:px-8 pb-16">
+    <div className="z-10 w-screen grid grid-cols-12 relative mt-6 px-6 md:px-8 pb-16 pr-8">
       <h2 className="col-span-12 text-center text-3xl md:text-4xl font-bold mb-6">
         Resultado del Test de Alexitimia
       </h2>
 
-      <div className="col-span-12 max-w-5xl mx-auto w-full bg-[#ffffffbb] rounded-2xl shadow-lg border border-gray-200 px-6 py-8 md:p-10">
+      <div className="col-span-12 max-w-7xl mx-auto w-full bg-[#ffffffbb] rounded-2xl shadow-lg border border-gray-200 px-6 py-8 md:p-10 pr-18">
         {/* Puntuación y nivel */}
         <div className="text-center mb-8">
           <p className="text-lg md:text-xl text-gray-600 mb-2">
