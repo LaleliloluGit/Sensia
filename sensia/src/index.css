@@ -29,7 +29,7 @@
 
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  font-family: belgiano;
+  /* font-family: belgiano; */
   letter-spacing: 0.3px;
   line-height: 1.5;
   font-weight: 400;

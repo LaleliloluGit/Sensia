@@ -10,21 +10,21 @@
 .bg-secundario {
     background-color: #DCE3DA;
 }
-.bg-ira{
-    background-color: #FFB9BA;
+.border-ira{
+    border:6px solid #FFB9BA;
 }
-.bg-asco{
-    background-color: #C8FDDE;
+.border-asco{
+    border:6px solid #C8FDDE;
 }
-.bg-tristeza{
-    background-color: #e1cbff;
+.border-tristeza{
+    border:6px solid #e1cbff;
 }
-.bg-felicidad{
-    background-color: #F7CC92;
+.border-felicidad{
+    border:6px solid #F7CC92;
 }
-.bg-sorpresa{
-    background-color: #FEFFB8;
+.border-sorpresa{
+    border:6px solid #FEFFB8;
 }
-.bg-miedo{
-    background-color: #DBDBDB;
+.border-miedo{
+    border:6px solid #DBDBDB;
 }
