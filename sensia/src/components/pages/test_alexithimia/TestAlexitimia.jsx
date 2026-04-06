@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import preguntas from "../../../data/alexitimiaPreguntas.json";
 import "../../../style/test_alexithimia.css";
+import HeaderComponent from "../../common/HeaderComponent";
 
 const OPCIONES = [
   { valor: 1, texto: "Totalmente en desacuerdo" },
@@ -16,6 +17,13 @@ const OPCIONES = [
   { valor: 10, texto: "Totalmente de acuerdo" },
 ];
 
+/**
+ * Componente principal para el test de alexitimia. 
+ * Muestra una serie de preguntas con opciones de respuesta en una escala del 1 al 10.
+ * Permite al usuario seleccionar una respuesta para cada pregunta, retroceder a la pregunta anterior y, al finalizar, 
+ * envía los resultados al backend para su almacenamiento y redirige a la página de resultados.
+ * @returns 
+ */
 export default function TestAlexitimia() {
   const navigate = useNavigate();
 
@@ -131,6 +139,7 @@ export default function TestAlexitimia() {
 
       setTestEnviado(true);
 
+      // Redirigir a la página de resultados con la puntuación total y el nivel de alexitimia obtenido
       navigate("/sensia/resultado_test", {
         state: {
           puntuacionTotal,
@@ -167,10 +176,8 @@ export default function TestAlexitimia() {
 
   return (
     <div className="z-10 w-screen grid grid-cols-12 relative mt-10 px-8 max-w-7xl mx-auto">
-      <h2 className="col-span-12 text-center text-4xl font-bold mb-6">
-        Test de Alexitimia
-      </h2>
-
+      <HeaderComponent h1="Test de Alexitimia" h2="Responde las siguientes preguntas para conocer tu nivel de alexitimia" />
+    
       <div className="col-span-12 mb-8">
         <p className="text-center text-lg mb-2">
           Pregunta {indiceActual + 1} de {preguntas.length}
