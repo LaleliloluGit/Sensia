@@ -5,6 +5,11 @@ export async function getRegistrosCursos() {
   return rows;
 }
 
+export async function getRegistrosCursosByUserId(id) {
+  const [rows] = await db.execute("SELECT * FROM registro_cursos WHERE usuario_id = ?", [id]);
+  return rows;
+}
+
 export async function createRegistroCurso(
   usuario_id,
   curso_id,

@@ -4,6 +4,7 @@
 
 import {
   getRegistrosCursos,
+  getRegistrosCursosByUserId,
   createRegistroCurso,
   deleteRegistroCursoById,
 } from "../database/models/registrosCursosModel.js";
@@ -11,6 +12,16 @@ import {
 export async function getRegistrosCursosController(req, res) {
   try {
     const registros = await getRegistrosCursos();
+    res.json(registros);
+  } catch (err) {
+    console.error("Error al obtener los registros cursos:", err);
+    res.status(500).json({ error: "Error al obtener los registros cursos" });
+  }
+}
+export async function getRegistrosCursosByUserIdController(req, res) {
+  try {
+    const { id } = req.params;
+    const registros = await getRegistrosCursosByUserId(id);
     res.json(registros);
   } catch (err) {
     console.error("Error al obtener los registros cursos:", err);

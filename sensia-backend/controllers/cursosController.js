@@ -4,6 +4,8 @@
 
 import {
   getCursos,
+  getCursosById,
+  getCursosByCategory,
   createCurso,
   deleteCursoById,
 } from "../database/models/cursosModel.js";
@@ -18,15 +20,39 @@ export async function getCursosController(req, res) {
   }
 }
 
+export async function getCursosByIdController(req, res) {
+  try {
+    const {id} = req.params;
+    const cursos = await getCursosById(id);
+    res.json(cursos);
+  } catch (err) {
+    console.error("Error al obtener los cursos:", err); 
+    res.status(500).json({ error: "Error al obtener los cursos" });
+  }
+}
+
+export async function getCursosByCategoryController(req, res) {
+  try {
+    const {categoria} = req.params;
+    const cursos = await getCursosByCategory(categoria);
+    res.json(cursos);
+  } catch (err) {
+    console.error("Error al obtener los cursos:", err); 
+    res.status(500).json({ error: "Error al obtener los cursos" });
+  }
+}
+
 export async function createCursoController(req, res) {
   try {
-    const { titulo, descripcion } = req.body;
-    if (!titulo || !descripcion) {
+    const { titulo, descripcion, contenido, categoria } = req.body;
+    if (!titulo || !descripcion || !contenido || !categoria) {
       return res.status(400).json({ error: "Faltan campos requeridos" });
     }
     const newCurso = await createCurso(
       titulo,
       descripcion,
+      contenido,
+      categoria
     );
     res.status(201).json({ message: "Curso creado", curso: newCurso });
   } catch (err) {
