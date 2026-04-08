@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom"
-import Porcentaje_mensual_registros from "./Porcentaje_mensual_registros"
-import Porcentaje_mensual_tests from "./Porcentaje_mensual_tests"
+import PageTitle from "../../common/PageTitle"
+import GraficaRegistros from "./GraficaRegistros"
+import GraficaTests from "./GraficaTests"
 
 
 /**
@@ -10,32 +11,23 @@ import Porcentaje_mensual_tests from "./Porcentaje_mensual_tests"
  * registrar una nueva emoción, realizar un test de alexitimia o revisar el diario emocional, entre otras.
  * @returns 
  */
-export default function Body_home() {
+export default function InicioPage() {
   return (
     <div className="min-h-screen w-screen px-4 py-8 relative">
+      
       <div className="max-w-7xl mx-auto pr-4">
         {/* HEADER */}
-        <section className="mb-8">
-          <div className="rounded-3xl bg-gradient-to-r from-slate-900 via-slate-800 to-slate-700 text-white p-8 md:p-10 shadow-xl">
-            <p className="uppercase tracking-[0.25em] text-sm text-slate-300 mb-3">
-              Panel principal
-            </p>
-            <h1 className="text-3xl md:text-4xl font-bold mb-3">Bienvenida a Sensia</h1>
-            <p className="text-slate-200 max-w-2xl leading-relaxed">
-              Visualiza la evolución mensual de los registros emocionales y los tests de
-              alexitimia desde un panel más claro, moderno y visual.
-            </p>
-          </div>
-        </section>
+        <PageTitle title="Panel principal" h1="Bienvenido a Sensia" h2="Visualiza la evolución mensual de los registros emocionales y los tests de
+                  alexitimia desde un panel más claro, moderno y fácil de interpretar." />
 
         {/* GRÁFICAS */}
         <section className="grid grid-cols-12 gap-6 mb-8">
           <div className="col-span-12 xl:col-span-7">
-            <Porcentaje_mensual_registros />
+            <GraficaRegistros />
           </div>
 
           <div className="col-span-12 xl:col-span-5">
-            <Porcentaje_mensual_tests />
+            <GraficaTests />
           </div>
         </section>
 
@@ -43,7 +35,7 @@ export default function Body_home() {
         <section className="grid grid-cols-12 gap-6">
           <Link
             to="./registrar_emocion"
-            className="col-span-12 md:col-span-6 group rounded-3xl bg-white border border-slate-200 p-6 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+            className="col-span-12 md:col-span-6 group rounded-3xl mi-header hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
           >
             <div className="flex items-start justify-between gap-4">
               <div>
@@ -59,7 +51,7 @@ export default function Body_home() {
                 </p>
               </div>
 
-              <div className="rounded-2xl bg-sky-100 text-sky-700 px-4 py-2 font-semibold group-hover:scale-105 transition">
+              <div className="rounded-2xl bg-secundario px-4 py-2 font-semibold group-hover:scale-105 transition">
                 Ir
               </div>
             </div>
@@ -67,7 +59,7 @@ export default function Body_home() {
 
           <Link
             to="./alexithimia_test"
-            className="col-span-12 md:col-span-6 group rounded-3xl bg-white border border-slate-200 p-6 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+            className="col-span-12 md:col-span-6 group rounded-3xl mi-header hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
           >
             <div className="flex items-start justify-between gap-4">
               <div>
@@ -83,14 +75,14 @@ export default function Body_home() {
                 </p>
               </div>
 
-              <div className="rounded-2xl bg-violet-100 text-violet-700 px-4 py-2 font-semibold group-hover:scale-105 transition">
+              <div className="rounded-2xl bg-secundario px-4 py-2 font-semibold group-hover:scale-105 transition">
                 Ir
               </div>
             </div>
           </Link>
           <Link
             to="./diario_emocional"
-            className="col-span-12 md:col-span-6 group rounded-3xl bg-white border border-slate-200 p-6 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+            className="col-span-12 md:col-span-6 group rounded-3xl mi-header hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
           >
             <div className="flex items-start justify-between gap-4">
               <div>
@@ -106,14 +98,14 @@ export default function Body_home() {
                 </p>
               </div>
 
-              <div className="rounded-2xl bg-amber-100 text-amber-700 px-4 py-2 font-semibold group-hover:scale-105 transition">
+              <div className="rounded-2xl bg-secundario px-4 py-2 font-semibold group-hover:scale-105 transition">
                 Ir
               </div>
             </div>
           </Link>
           <Link
             to="./cursos"
-            className="col-span-12 md:col-span-6 group rounded-3xl bg-white border border-slate-200 p-6 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+            className="col-span-12 md:col-span-6 group rounded-3xl mi-header hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
           >
             <div className="flex items-start justify-between gap-4">
               <div>
@@ -128,7 +120,7 @@ export default function Body_home() {
                 </p>
               </div>
 
-              <div className="rounded-2xl bg-amber-100 text-amber-700 px-4 py-2 font-semibold group-hover:scale-105 transition">
+              <div className="rounded-2xl bg-secundario px-4 py-2 font-semibold group-hover:scale-105 transition">
                 Ir
               </div>
             </div>

@@ -4,6 +4,8 @@
 
 import {
   getRegistrosEmocionales,
+  getRegistrosEmocionalesCompletos,
+  getRegistrosEmocionalesCompletosById,
   createRegistroEmocional,
   deleteRegistroEmocionalById,
 } from "../database/models/registrosEmocionalesModel.js";
@@ -11,6 +13,31 @@ import {
 export async function getRegistrosEmocionalesController(req, res) {
   try {
     const registros = await getRegistrosEmocionales();
+    res.json(registros);
+  } catch (err) {
+    console.error("Error al obtener los registros emocionales:", err);
+    res
+      .status(500)
+      .json({ error: "Error al obtener los registros emocionales" });
+  }
+}
+
+export async function getRegistrosEmocionalesCompletoscontroller(req, res) {
+  try {
+    const registros = await getRegistrosEmocionalesCompletos();
+    res.json(registros);
+  } catch (err) {
+    console.error("Error al obtener los registros emocionales:", err);
+    res
+      .status(500)
+      .json({ error: "Error al obtener los registros emocionales" });
+  }
+}
+
+export async function getRegistrosEmocionalesCompletosByIdcontroller(req, res) {
+  try {
+    const { id } = req.params;
+    const registros = await getRegistrosEmocionalesCompletosById(id);
     res.json(registros);
   } catch (err) {
     console.error("Error al obtener los registros emocionales:", err);

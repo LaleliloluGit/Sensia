@@ -1,12 +1,12 @@
 import { Outlet } from "react-router-dom"
-import Header from "../../common/Header"
+import Header from "./Header"
 
 /**
  * Componente principal para la página de inicio. 
  * Contiene un fondo con un arcoíris animado, un encabezado y un espacio para mostrar el contenido de las subrutas.
  * @returns 
  */
-function Home() {
+function Layout() {
   return (
     <div className="min-h-screen w-screen relative">
       <div className="w-screen h-screen fixed top-0 left-0 overflow-hidden">
@@ -15,11 +15,11 @@ function Home() {
 
       <Header />
 
-      <main className="relative z-10 pt-28 md:pt-32">
+      <main className="relative z-10 pt-26 ">
         <Outlet />
       </main>
     </div>
   )
 }
 
-export default Home
+export default Layout

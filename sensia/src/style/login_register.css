@@ -39,7 +39,7 @@ input {
     padding: 12px;
     border-radius: 10px;
     border: 1px solid #545454;
-    background: rgba(255, 255, 255, 0.6);
+    /* background: rgba(255, 255, 255, 0.6); */
     transition: all 0.3s ease;
 }
 
@@ -84,11 +84,16 @@ button {
     border: none;
     cursor: pointer;
 
-    background: linear-gradient(135deg, #646cff, #00c6ff);
-    color: white;
+    /* background: linear-gradient(135deg, #646cff, #00c6ff); */
+    border: 4px solid #bcafc5aa;
+    background-color: #bcafc5aa;
+    color: black;
     font-weight: 500;
 
     transition: all 0.3s ease;
+}
+button:hover {
+    transform: translateY(-3px);
 }
 .button {
     flex: 1;
@@ -109,11 +114,6 @@ button {
 .button:hover {
     top: -4px
     
-}
-
-button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(100, 108, 255, 0.4);
 }
 
 /* ===============================

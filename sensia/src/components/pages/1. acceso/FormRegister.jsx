@@ -3,8 +3,12 @@ import { Link, useNavigate } from "react-router-dom"
 import logo from "./../../../assets/logo_login.png"
 import { useState } from "react"
 
-
-function Form_register() {
+/**
+ * Componente de formulario de registro. 
+ * Permite a los usuarios ingresar su información personal, validar los campos antes de enviar la solicitud al backend,
+ * @returns 
+ */
+export default function FormRegister() {
 
     const [formData, setFormData] = useState({
         nombre: "",
@@ -19,6 +23,7 @@ function Form_register() {
     const [error, setError] = useState('');
     const [campoError, setCampoError] = useState({});
 
+    // Valida que todos los campos estén completos y que las contraseñas coincidan antes de enviar el formulario
     const validateAllFields = async () => {
         const newErrors = {};
 
@@ -43,11 +48,13 @@ function Form_register() {
         return true;
     };
 
+    // Valida que un campo no esté vacío
     const validateField = (value) => {
         if (!value.trim()) return "Este campo es obligatorio";
         return "";
     };
 
+    // Maneja el cambio en los campos del formulario, actualizando el estado y limpiando los errores correspondientes
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData(prev => ({ ...prev, [name]: value }));
@@ -59,6 +66,8 @@ function Form_register() {
         setError("");
     };
 
+    // Maneja el envío del formulario, validando los campos, 
+    // enviando la solicitud al backend y manejando la respuesta para redirigir al usuario o mostrar errores
     const handleSubmit = async (e) => {
 
         e.preventDefault();
@@ -155,4 +164,3 @@ function Form_register() {
     )
 }
 
-export default Form_register

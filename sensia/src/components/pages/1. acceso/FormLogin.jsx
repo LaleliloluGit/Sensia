@@ -3,8 +3,12 @@ import "./../../../style/login_register.css"
 import { Link, useNavigate } from "react-router-dom"
 import logo from "./../../../assets/logo_login.png"
 
-
-function Form_login() {
+/**
+ * Componente de formulario de login. Permite a los usuarios ingresar su nombre de usuario y contraseña para acceder a la aplicación.
+ * Valida los campos antes de enviar la solicitud al backend, maneja la respuesta del servidor y redirige al usuario según corresponda.
+ * @returns 
+ */
+export default function FormLogin() {
 
     const [formData, setFormData] = useState({
         username: "",
@@ -120,4 +124,3 @@ function Form_login() {
     )
 }
 
-export default Form_login

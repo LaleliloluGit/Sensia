@@ -18,7 +18,7 @@ const MESES = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "O
  * y los muestra en una gráfica utilizando Recharts.
  * @returns 
  */
-function Porcentaje_mensual_tests() {
+export default function GraficaTests() {
   const [tests, setTests] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState("")
@@ -68,7 +68,7 @@ function Porcentaje_mensual_tests() {
   const mediaMensual = totalTests > 0 ? (totalTests / 12).toFixed(1) : 0
 
   return (
-    <div className="rounded-3xl bg-white border border-slate-200 p-6 shadow-sm h-full">
+    <div className="rounded-3xl mi-header h-full">
       <div className="flex flex-col gap-4 mb-6">
         <div>
           <p className="text-sm uppercase tracking-widest text-slate-400 mb-2">
@@ -123,5 +123,3 @@ function Porcentaje_mensual_tests() {
     </div>
   )
 }
-
-export default Porcentaje_mensual_tests

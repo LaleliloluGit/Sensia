@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import CursoLista from "./CursoLista";
 import CursoDetalle from "./CursoDetalle";
-import ProgresoCursos from "./ProgresoCurso";
-import HeaderComponent from "../../common/HeaderComponent";
+import PageTitle from "../../common/PageTitle";
+import CursoProgreso from "./CursoProgreso";
 
 /**
  * Componente principal para la sección de cursos.
@@ -30,16 +30,16 @@ function CursosPage() {
         // 1. Cargar todos los cursos
         const resCursos = await fetch("http://localhost:3000/Sensia/cursos/todos");
         const cursosData = await resCursos.json();
-        
+
         // 2. Guardar cursos en estado
         setCursos(cursosData);
-        
+
         // 3. Si no hay cursos, no seleccionar ninguno
         if (!cursosData.length) {
           setCursoActivo(null);
           return;
         }
-        
+
         // 4. Si hay cursos, cargar progreso del usuario
         const usuario = JSON.parse(sessionStorage.getItem("usuario"));
         if (!usuario?.id) {
@@ -78,7 +78,7 @@ function CursosPage() {
    */
   const handleCompletarCurso = async () => {
     try {
-  
+
       const usuario = JSON.parse(sessionStorage.getItem("usuario"));
       if (!usuario?.id || !cursoActivo) return;
 
@@ -103,7 +103,7 @@ function CursosPage() {
       const siguienteCurso = cursos.find(
         (curso) => !nuevosCompletados.includes(curso.id)
       );
-      
+
       if (siguienteCurso) {
         setCursoActivo(siguienteCurso);
       }
@@ -113,37 +113,40 @@ function CursosPage() {
   };
 
   return (
-    <div className="p-6 min-h-screen max-w-7xl mx-auto">
-      <HeaderComponent h1="Cursos" h2="Realiza los cursos de Sensia para conocer mas sobre las emociones y los sentimientos" />
+    <div className="min-h-screen w-screen px-4 py-8 relative">
 
-      {error && (
-        <div className="bg-red-100 text-red-700 p-3 rounded mb-4">
-          {error}
-        </div>
-      )}
+      <div className="max-w-7xl mx-auto pr-4">
+        <PageTitle title="Cursos" h1="Aprende con los cursos de Sensia" h2="Realiza los cursos de Sensia para conocer mas sobre las emociones y los sentimientos" />
 
-      <div className="grid grid-cols-1 lg:grid-cols-[320px_1fr] gap-6">
-        <div className="space-y-6">
-          <ProgresoCursos
-            total={cursos.length}
-            completados={cursosCompletados.length}
+        {error && (
+          <div className="bg-red-100 text-red-700 p-3 rounded mb-4">
+            {error}
+          </div>
+        )}
+
+        <div className="grid grid-cols-1 lg:grid-cols-[320px_1fr] gap-6">
+          <div className="space-y-6">
+            <CursoProgreso
+              total={cursos.length}
+              completados={cursosCompletados.length}
+            />
+
+            <CursoLista
+              cursos={cursos}
+              cursoActivoId={cursoActivo?.id}
+              cursosCompletados={cursosCompletados}
+              onSeleccionarCurso={setCursoActivo}
+            />
+          </div>
+
+          <CursoDetalle
+            curso={cursoActivo}
+            completado={
+              cursoActivo ? cursosCompletados.includes(cursoActivo.id) : false
+            }
+            onCompletar={handleCompletarCurso}
           />
-
-          <CursoLista
-            cursos={cursos}
-            cursoActivoId={cursoActivo?.id}
-            cursosCompletados={cursosCompletados}
-            onSeleccionarCurso={setCursoActivo}
-          />
         </div>
-
-        <CursoDetalle
-          curso={cursoActivo}
-          completado={
-            cursoActivo ? cursosCompletados.includes(cursoActivo.id) : false
-          }
-          onCompletar={handleCompletarCurso}
-        />
       </div>
     </div>
   );

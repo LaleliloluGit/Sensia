@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import preguntas from "../../../data/alexitimiaPreguntas.json";
 import "../../../style/test_alexithimia.css";
-import HeaderComponent from "../../common/HeaderComponent";
+import PageTitle from "../../common/PageTitle";
 
 const OPCIONES = [
   { valor: 1, texto: "Totalmente en desacuerdo" },
@@ -24,7 +24,7 @@ const OPCIONES = [
  * envía los resultados al backend para su almacenamiento y redirige a la página de resultados.
  * @returns 
  */
-export default function TestAlexitimia() {
+export default function TestPage() {
   const navigate = useNavigate();
 
   const [respuestas, setRespuestas] = useState([]);
@@ -175,72 +175,74 @@ export default function TestAlexitimia() {
   }
 
   return (
-    <div className="z-10 w-screen grid grid-cols-12 relative mt-10 px-8 max-w-7xl mx-auto">
-      <HeaderComponent h1="Test de Alexitimia" h2="Responde las siguientes preguntas para conocer tu nivel de alexitimia" />
-    
-      <div className="col-span-12 mb-8">
-        <p className="text-center text-lg mb-2">
-          Pregunta {indiceActual + 1} de {preguntas.length}
-        </p>
+    <div className="min-h-screen w-screen px-4 py-8 relative">
 
-        <div className="w-full bg-gray-200 rounded-full h-3">
-          <div
-            className="bg-blue-500 h-3 rounded-full transition-all"
-            style={{ width: `${((indiceActual + 1) / preguntas.length) * 100}%` }}
-          />
-        </div>
-      </div>
+      <div className="max-w-7xl mx-auto pr-4">
+        <PageTitle title="Test Alexithimia" h1="Realiza el test de Alexitimia" h2="Responde las siguientes preguntas para conocer tu nivel de alexitimia" />
 
-      <div
-        className={`col-span-12 grid border-gray-600 border rounded-2xl p-8 bg-[#ffffffbb] transition-opacity`}
-      >
-        <div className="flex justify-center items-center min-h-28 col-span-12">
 
-          <h3 className={`col-span-12 text-center text-2xl md:text-3xl font-semibold max-w-4xl mx-auto leading-relaxed  duration-300 ${fade ? "opacity-0" : "opacity-100"}`}>
-            {preguntaActual?.texto}
-          </h3>
-        </div>
+        <div className="col-span-12 grid border-gray-600 border rounded-2xl mi-header" >
+          <div className="col-span-12 mb-8">
+            <p className="text-center text-lg mb-2">
+              Pregunta {indiceActual + 1} de {preguntas.length}
+            </p>
 
-        <div className="col-span-12 flex justify-between text-sm md:text-base mb-3 px-2">
-          <span className="font-medium text-green-600">
-            1 · Totalmente en desacuerdo
-          </span>
+            <div className="w-full bg-gray-100 border-gray-400 border rounded-full h-3">
 
-          <span className="font-medium text-red-600">
-            10 · Totalmente de acuerdo
-          </span>
-        </div>
+              <div
+                className="bg-primario h-3 rounded-full transition-all"
+                style={{ width: `${((indiceActual + 1) / preguntas.length) * 100}%` }}
+              />
+            </div>
+          </div>
+          <div className="flex justify-center items-center min-h-28 col-span-12">
 
-        <div className="col-span-12 grid grid-cols-5 md:grid-cols-10 gap-3 mb-10">
-          {OPCIONES.map((opcion) => (
+            <h3 className={`col-span-12 text-center text-2xl md:text-3xl font-semibold max-w-4xl mx-auto leading-relaxed  duration-300 ${fade ? "opacity-0" : "opacity-100"}`}>
+              {preguntaActual?.texto}
+            </h3>
+          </div>
+
+          <div className="col-span-12 flex justify-between text-sm md:text-base mb-3 px-2">
+            <span className="font-medium text-green-600">
+              1 · Totalmente en desacuerdo
+            </span>
+
+            <span className="font-medium text-red-600">
+              10 · Totalmente de acuerdo
+            </span>
+          </div>
+
+          <div className="col-span-12 grid grid-cols-5 md:grid-cols-10 gap-3 mb-10">
+            {OPCIONES.map((opcion) => (
+              <button
+                key={opcion.valor}
+                onClick={() => seleccionarRespuesta(opcion.valor, opcion.texto)}
+                disabled={enviando}
+                className="py-4 rounded-xl font-bold text-lg shadow transition transform hover:scale-105 text-white disabled:opacity-50 disabled:cursor-not-allowed"
+                style={{
+                  background: `hsl(${(10 - opcion.valor) * 12}, 70%, 50%)`,
+                }}
+              >
+                {opcion.valor}
+              </button>
+            ))}
+          </div>
+
+          <div className="col-span-12 flex justify-center mt-4">
             <button
-              key={opcion.valor}
-              onClick={() => seleccionarRespuesta(opcion.valor, opcion.texto)}
-              disabled={enviando}
-              className="py-4 rounded-xl font-bold text-lg shadow transition transform hover:scale-105 text-white disabled:opacity-50 disabled:cursor-not-allowed"
-              style={{
-                background: `hsl(${(10 - opcion.valor) * 12}, 70%, 50%)`,
-              }}
+              onClick={retroceder}
+              disabled={respuestas.length === 0 || enviando}
+              className="px-6 py-3 rounded-lg transition text-3xl disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {opcion.valor}
+              Retroceder
             </button>
-          ))}
+          </div>
         </div>
 
-        <div className="col-span-12 flex justify-center mt-4">
-          <button
-            onClick={retroceder}
-            disabled={respuestas.length === 0 || enviando}
-            className="px-6 py-3 rounded-lg bg-gray-200 hover:bg-gray-300 transition text-3xl disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            Retroceder
-          </button>
-        </div>
+        {error && (
+          <p className="text-red-500 text-center mt-4 font-medium">{error}</p>
+        )}
       </div>
-
-      {error && (
-        <p className="text-red-500 text-center mt-4 font-medium">{error}</p>
-      )}
     </div>
   );
 }

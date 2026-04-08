@@ -5,12 +5,12 @@
  * @param {*} param0 
  * @returns 
  */
-export default function ProgresoCursos({ total, completados }) {
+export default function CursoProgreso({ total, completados }) {
   // Calcula el porcentaje de cursos completados
   const porcentaje = total ? Math.round((completados / total) * 100) : 0;
 
   return (
-    <div className="bg-white p-4 rounded-xl shadow">
+    <div className="rounded-xl mi-header-p">
       <h3 className="font-semibold text-lg">Tu progreso</h3>
 
       <p className="text-sm text-gray-500 mb-2">

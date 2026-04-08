@@ -1,45 +1,36 @@
 import "../../../style/efectos.css";
 
-function Card_registrar_emocion({
+
+/**
+ * Componente que representa una tarjeta para registrar una emoción. 
+ * Muestra el nombre de la emoción, su definición y sus síntomas.
+ * Permite seleccionar la emoción para añadirla a la lista de emociones seleccionadas.
+ * El borde de la tarjeta cambia de color según la emoción seleccionada.
+ * @param {*} param0 
+ * @returns 
+ */
+export default function CardEmocion({
   emocion,
   emocionesSeleccionadas,
   setEmocionesSeleccionadas
 }) {
+
   const borderClass =
     emocionesSeleccionadas.length === 0
       ? `border-${emocion.nombre.toLowerCase()}`
       : `border-${emocionesSeleccionadas[0]?.nombre.toLowerCase()}`;
 
   return (
-    <article
+    <article className={`col-span-6 lg:col-span-4 efecto-ampliar min-h-80 rounded-2xl mi-header hover:shadow-2xl cursor-pointer mb-8 p-5 flex flex-col gap-4 transition-all duration-300 ${borderClass}`}
       onClick={() =>
         setEmocionesSeleccionadas((prev) => [...prev, emocion])
       }
-      className={`
-        col-span-6 lg:col-span-4 xl:col-span-3 2xl:col-span-2
-        efecto-ampliar
-        ${borderClass}
-        min-h-80
-        rounded-2xl
-        border
-        bg-linear-to-b from-white to-slate-50
-        
-        shadow-lg hover:shadow-2xl
-        cursor-pointer
-        m-4 p-5
-        flex flex-col gap-4
-        transition-all duration-300
-      `}
     >
       {/* Header */}
       <div className="flex items-start justify-between gap-3">
         <h3 className="text-xl font-bold text-slate-800 leading-tight">
           {emocion.nombre}
         </h3>
-
-        {/* <span className="shrink-0 rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-600">
-          Emoción
-        </span> */}
       </div>
 
       {/* Definición */}
@@ -78,5 +69,3 @@ function Card_registrar_emocion({
     </article>
   );
 }
-
-export default Card_registrar_emocion;

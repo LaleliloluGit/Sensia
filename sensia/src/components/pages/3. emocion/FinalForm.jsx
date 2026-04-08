@@ -1,14 +1,114 @@
-function Formulario_registro_emocional({
+import { useEffect, useState } from "react";
+
+/**
+ * Componente que muestra el formulario para registrar una emoción seleccionada, 
+ * indicando la parte del cuerpo donde se siente, la intensidad y una descripción.
+ * @param {*} param0 
+ * @returns 
+ */
+export default function FinalForm({
   emocionFinalSeleccionada,
-  partesCuerpo,
   formData,
   setFormData,
-  handleSubmit,
-  handleChange,
+  setMensaje,
+  setError,
   mensaje,
   error,
   loadingGuardar,
 }) {
+  const [partesCuerpo, setPartesCuerpo] = useState([])
+
+  const usuario = sessionStorage.getItem("usuario");
+  const usuario_id = usuario ? JSON.parse(usuario).id : null;
+
+  useEffect(() => {
+
+    const getPartesCuerpo = async () => {
+      try {
+        const response = await fetch("http://localhost:3000/sensia/partes_cuerpo/todos")
+        const data = await response.json()
+        setPartesCuerpo(data)
+      } catch (error) {
+        console.error("Error al obtener las partes del cuerpo:", error)
+      }
+    }
+
+    getPartesCuerpo()
+  }, [])
+
+  const handleChange = (e) => {
+    const { name, value } = e.target
+    setFormData((prev) => ({
+      ...prev,
+      [name]: name === "intensidad" ? Number(value) : value,
+    }))
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    setMensaje("")
+    setError("")
+
+    if (!usuario_id) {
+      setError("No se ha encontrado el usuario logueado.")
+      return
+    }
+
+    if (!emocionFinalSeleccionada?.id) {
+      setError("Debes seleccionar una emoción de grado 3.")
+      return
+    }
+
+    if (!formData.parte_cuerpo_id) {
+      setError("Debes seleccionar una parte del cuerpo.")
+      return
+    }
+
+    if (!formData.descripcion_situacion.trim()) {
+      setError("Debes escribir una descripción.")
+      return
+    }
+
+    try {
+      const body = {
+        usuario_id,
+        emocion_id: emocionFinalSeleccionada.id,
+        parte_cuerpo_id: Number(formData.parte_cuerpo_id),
+        descripcion_situacion: formData.descripcion_situacion.trim(),
+        fecha_hora: new Date().toISOString().slice(0, 19).replace("T", " "),
+        intensidad: formData.intensidad,
+      }
+
+      const response = await fetch("http://localhost:3000/sensia/registros_emocionales/crear", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      })
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        throw new Error(data.error || data.detalle || "No se pudo guardar el registro emocional")
+      }
+
+      // Si el registro se guarda correctamente, 
+      // se muestra un mensaje de éxito y se resetea el formulario
+      setMensaje("Registro emocional guardado correctamente.")
+      setError("")
+      setFormData({
+        parte_cuerpo_id: "",
+        descripcion_situacion: "",
+        intensidad: 5,
+      })
+
+    } catch (err) {
+      console.error("Error al guardar el registro emocional:", err)
+      setError(err.message)
+    }
+  }
+
   return (
     <div className="col-span-12 mt-8">
       <div className="max-w-7xl mx-auto rounded-3xl overflow-hidden shadow-2xl">
@@ -55,17 +155,15 @@ function Formulario_registro_emocional({
                             parte_cuerpo_id: parte.id,
                           }))
                         }
-                        className={`rounded-2xl border p-4 text-left transition-all duration-200 ${
-                          activa
+                        className={`rounded-2xl border p-4 text-left transition-all duration-200 ${activa
                             ? "bg-slate-800 text-white border-slate-800 shadow-lg scale-[1.02]"
                             : "bg-white text-slate-700 border-slate-200 hover:border-slate-400 hover:shadow-md"
-                        }`}
+                          }`}
                       >
                         <p className="font-semibold">{parte.nombre}</p>
                         <p
-                          className={`text-xs mt-1 leading-relaxed ${
-                            activa ? "text-slate-200" : "text-slate-500"
-                          }`}
+                          className={`text-xs mt-1 leading-relaxed ${activa ? "text-slate-200" : "text-slate-500"
+                            }`}
                         >
                           {parte.descripcion}
                         </p>
@@ -149,5 +247,3 @@ function Formulario_registro_emocional({
     </div>
   )
 }
-
-export default Formulario_registro_emocional

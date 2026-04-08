@@ -26,13 +26,25 @@
   font-family: belgiano;
   src: url(./assets/typo/belgiano/Belgiano\ Serif\ 2.otf);
 }
+@font-face {
+  font-family: coolvetica;
+  src: url(./assets/typo/coolvetica/Coolvetica\ Rg.otf);
+}
+@font-face {
+  font-family: creato;
+  src: url(./assets/typo/creato/CreatoDisplay-regular.otf);
+}
+@font-face {
+  font-family: creatoLight;
+  src: url(./assets/typo/creato/CreatoDisplay-Light.otf);
+}
 
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  /* font-family: belgiano; */
-  letter-spacing: 0.3px;
+  font-family: creato;
+  letter-spacing: 1.5px;
   line-height: 1.5;
-  font-weight: 400;
+  font-weight: 100;
 
   color-scheme: light dark;
   /* color: rgba(255, 255, 255, 0.87); */
@@ -113,7 +125,33 @@ button:focus-visible {
       rgba(255, 255, 255, 0.722), 
       rgba(255, 179, 153, 0.79),
       rgba(255, 255, 255, 0.707));
-  animation: girarColor 20s ease-in-out infinite alternate;
+  animation: girarColor 30s ease-in-out infinite alternate;
+}
+
+.mi-header {
+  border: 1px solid #e2e8f0;
+  background-color: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 2rem;
+  box-shadow: 0 10px 40px rgba(15, 23, 42, 0.08);
+  border-radius: 1.5rem;
+}
+.mi-header-p {
+  border: 1px solid #e2e8f0;
+  background-color: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 1.6rem;
+  box-shadow: 0 10px 40px rgba(15, 23, 42, 0.08);
+  border-radius: 1.5rem;
+}
+
+/* md:p-10 → breakpoint md (768px en Tailwind) */
+@media (min-width: 768px) {
+  .mi-header {
+    padding: 2.5rem;
+  }
 }
 
 @keyframes girarColor {

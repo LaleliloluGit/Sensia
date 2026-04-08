@@ -13,7 +13,7 @@ export default function CursoLista({
   onSeleccionarCurso,
 }) {
   return (
-    <div className="bg-white p-4 rounded-xl shadow">
+    <div className="rounded-xl mi-header-p">
       <h3 className="font-semibold mb-3">Cursos</h3>
 
       <div className="space-y-2">

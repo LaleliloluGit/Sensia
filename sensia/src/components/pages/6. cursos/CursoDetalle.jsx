@@ -41,7 +41,7 @@ function CursoDetalle({ curso, completado, onCompletar, guardando }) {
   const bloqueado = segundos > 0 || completado;
 
   return (
-    <div className="bg-white p-6 rounded-xl shadow space-y-4">
+    <div className="rounded-xl mi-header-p">
       <div className="flex gap-2">
         <span className="bg-gray-200 px-2 py-1 rounded text-sm">
           {curso.categoria}

@@ -9,7 +9,7 @@ import { useLocation, useNavigate } from "react-router-dom";
  * Incluye también un aviso de que el resultado es orientativo y no sustituye una evaluación profesional, y ofrece opciones para repetir el test o volver al inicio.
  * @returns 
  */
-export default function ResultadoTest() {
+export default function TestResultado() {
   const location = useLocation();
   const navigate = useNavigate();
 

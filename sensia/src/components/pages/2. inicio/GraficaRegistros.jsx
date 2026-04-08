@@ -17,15 +17,13 @@ const MESES = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "O
  * los agrupa por mes y muestra una gráfica de área con la evolución a lo largo del año.
  * @returns 
  */
-function Porcentaje_mensual_registros() {
+export default function GraficaRegistros() {
   const [registros, setRegistros] = useState([])
-  const [loading, setLoading] = useState(true)
   const [error, setError] = useState("")
 
   useEffect(() => {
     const getRegistros = async () => {
       try {
-        setLoading(true)
         const response = await fetch("http://localhost:3000/sensia/registros_emocionales/todos")
         const data = await response.json()
 
@@ -37,8 +35,6 @@ function Porcentaje_mensual_registros() {
       } catch (err) {
         console.error(err)
         setError(err.message)
-      } finally {
-        setLoading(false)
       }
     }
 
@@ -67,7 +63,7 @@ function Porcentaje_mensual_registros() {
   const maxMes = Math.max(...dataGrafica.map((item) => item.total), 0)
 
   return (
-    <div className="rounded-3xl bg-white border border-slate-200 p-6 shadow-sm h-full">
+    <div className="rounded-3xl mi-header h-full">
       <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-6">
         <div>
           <p className="text-sm uppercase tracking-widest text-slate-400 mb-2">
@@ -80,28 +76,24 @@ function Porcentaje_mensual_registros() {
         </div>
 
         <div className="flex gap-3">
-          <div className="rounded-2xl bg-slate-100 px-4 py-3 min-w-[110px]">
+          <div className="rounded-2xl border-primario px-4 py-3 min-w-27.5">
             <p className="text-xs text-slate-500 mb-1">Total</p>
             <p className="text-2xl font-bold text-slate-800">{totalRegistros}</p>
           </div>
 
-          <div className="rounded-2xl bg-sky-50 px-4 py-3 min-w-[110px]">
+          <div className="rounded-2xl border-primario px-4 py-3 min-w-27.5">
             <p className="text-xs text-slate-500 mb-1">Pico mensual</p>
             <p className="text-2xl font-bold text-slate-800">{maxMes}</p>
           </div>
         </div>
       </div>
 
-      {loading ? (
-        <div className="h-[320px] flex items-center justify-center text-slate-500">
-          Cargando gráfica...
-        </div>
-      ) : error ? (
-        <div className="h-[320px] flex items-center justify-center text-red-600">
+      {error ? (
+        <div className="h-80 flex items-center justify-center text-red-600">
           {error}
         </div>
       ) : (
-        <div className="h-[320px]">
+        <div className="h-80">
           <ResponsiveContainer width="100%" height="100%">
             <AreaChart data={dataGrafica}>
               <defs>
@@ -135,5 +127,3 @@ function Porcentaje_mensual_registros() {
     </div>
   )
 }
-
-export default Porcentaje_mensual_registros
