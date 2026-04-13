@@ -53,7 +53,7 @@ export default function CardEmocion({
         </p>
 
         <ul className="space-y-2 text-sm text-slate-700">
-          {emocion.sintomas.split(";").map((sintoma, index) => {
+          {emocion.sintomas?.split(";").map((sintoma, index) => {
             const formattedSintoma = sintoma.trim();
             return (
               <li key={index} className="flex items-start gap-2 leading-5">

@@ -30,7 +30,7 @@ export default function RegistrarEmocionPage() {
 
   // Al cargar el componente, se obtienen las emociones principales y las partes del cuerpo
   useEffect(() => {
-    
+
     const getEmocionesPrincipales = async () => {
       try {
         const response = await fetch("http://localhost:3000/sensia/emociones/principales")
@@ -47,16 +47,16 @@ export default function RegistrarEmocionPage() {
   // Cuando se selecciona una emoción, se obtienen las emociones del siguiente grado
   //  y se resetean las emociones de grados superiores
   useEffect(() => {
-    
+
     const getEmocionesGrado = async (grado) => {
       try {
         const response = await fetch(
           "http://localhost:3000/sensia/emociones/emocion_sup/" +
-          encodeURIComponent(emocionesSeleccionadas[grado-2].nombre)
+          encodeURIComponent(emocionesSeleccionadas[grado - 2].nombre)
         )
         const data = await response.json()
 
-        if(grado === 2) {
+        if (grado === 2) {
           setEmocionesSecundarias(data)
           setEmocionesTerciarias([])
         } else if (grado === 3) {
@@ -118,12 +118,6 @@ export default function RegistrarEmocionPage() {
 
       <div className="max-w-7xl mx-auto pr-4 grid grid-cols-12 gap-x-8">
 
-        {/* Nav */}
-        <NavEmocion
-          emocionesSeleccionadas={emocionesSeleccionadas}
-          setEmocionesSeleccionadas={setEmocionesSeleccionadas}
-        />
-
         {/* Header */}
         <PageTitle
           title="Registrar emociones"
@@ -131,17 +125,27 @@ export default function RegistrarEmocionPage() {
           h2="Explora la ruleta de emociones y completa tu registro emocional seleccionando la emoción que mejor describa lo que sientes en este momento."
         />
 
-        
+        {/* Nav */}
+        <NavEmocion
+          emocionesSeleccionadas={emocionesSeleccionadas}
+          setEmocionesSeleccionadas={setEmocionesSeleccionadas}
+        />
+
         {/* Muestreo de emociones si aun no tenemos la emocion final */}
-        {emocionesSeleccionadas.length < 3 &&
-          emocionesActuales.map((emocion, index) => (
-            <CardEmocion
-              key={emocion.id ?? index}
-              emocion={emocion}
-              emocionesSeleccionadas={emocionesSeleccionadas}
-              setEmocionesSeleccionadas={setEmocionesSeleccionadas}
-            />
-          ))}
+        <div className="col-span-12 grid grid-cols-12 gap-8 justify-center">
+
+          {emocionesSeleccionadas.length < 3 &&
+
+            emocionesActuales.map((emocion, index) => (
+              <CardEmocion
+                key={emocion.id ?? index}
+                emocion={emocion}
+                emocionesSeleccionadas={emocionesSeleccionadas}
+                setEmocionesSeleccionadas={setEmocionesSeleccionadas}
+              />
+            ))
+          }
+        </div>
 
         {/* Se muestra el formulario si tenemos una emocion final seleccionada */}
         {emocionFinalSeleccionada && (
