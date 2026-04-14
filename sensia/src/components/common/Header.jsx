@@ -36,10 +36,10 @@ function Header() {
           </Link>
 
           {/* CENTRO */}
-          <nav className="hidden lg:flex items-center gap-2">
+          <nav className="hidden sm:flex items-center text-center gap-1 sm:gap-2">
             {links.map((link, index) => (
               <Link key={index} to={link.to}
-                className={`px-4 py-2 rounded-xl text-md font-medium transition no-underline ${isActive(link.to)
+                className={`px-2 sm:px-4 py-2 rounded-xl text-md font-medium transition no-underline ${isActive(link.to)
                   ? "text-slate-900! border-primario"
                   : "text-slate-800! bg-hover"
                   }`}
@@ -50,7 +50,7 @@ function Header() {
           </nav>
 
           {/* DERECHA */}
-          <div className="flex items-center gap-3">
+          <div className="hidden lg:flex items-center gap-3">
             <Link
               to="/sensia/registrar_emocion"
               className="hidden md:inline-flex px-4 py-2 rounded-xl border-primario bg-primario !text-slate-800 text-sm font-semibold hover:bg-slate-100 transition"
