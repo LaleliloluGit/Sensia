@@ -1,0 +1,48 @@
+.text-primario {
+    color: #EFA67D;
+}
+.text-secundario {
+    color: black;
+}
+.bg-hover {
+    background-color: transparent;
+}
+.bg-hover:hover {
+    background-color: #bcafc5aa;
+}
+.bg-primario {
+    background-color: #bcafc5aa;
+}
+.bg-secundario {
+    background-color: #A0466877;
+    color: black;
+    transition: all 0.3s ease;
+}
+.border-primario {
+    border: 3px solid #bcafc5aa;
+}
+.border-primario:hover {
+    background-color: #bcafc5aa;
+}
+.border-secundario {
+    border: 3px solid #A0466877;
+    color: black;
+}
+.border-ira{
+    border:6px solid #FFB9BA;
+}
+.border-asco{
+    border:6px solid #C8FDDE;
+}
+.border-tristeza{
+    border:6px solid #e1cbff;
+}
+.border-felicidad{
+    border:6px solid #F7CC92;
+}
+.border-sorpresa{
+    border:6px solid #FEFFB8;
+}
+.border-miedo{
+    border:6px solid #DBDBDB;
+}
