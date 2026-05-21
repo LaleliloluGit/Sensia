@@ -46,3 +46,15 @@
 .border-miedo{
     border:6px solid #DBDBDB;
 }
+
+.btn-primary {
+  background-color: #d1c9d7;
+  color: white;
+  border: 2px solid #c3b8cb;
+  padding: 10px 20px;
+  border-radius: 8px;
+}
+
+.btn-primary:hover {
+  background-color: #c3b8cb;
+}

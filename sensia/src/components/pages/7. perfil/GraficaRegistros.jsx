@@ -22,13 +22,33 @@ export default function GraficaRegistros() {
   const [error, setError] = useState("")
 
   useEffect(() => {
+    const usuarioGuardado = sessionStorage.getItem("usuario")
+    const usuario = usuarioGuardado ? JSON.parse(usuarioGuardado) : null
+    const usuarioId = usuario?.id
+
     const getRegistros = async () => {
+      if (!usuarioId) {
+        setError("No se ha encontrado el usuario logueado")
+        return
+      }
+
       try {
-        const response = await fetch("http://localhost:3000/sensia/registros_emocionales/todos")
-        const data = await response.json()
+        setError("")
+        const response = await fetch(`http://localhost:3000/sensia/registros_emocionales/completo/${usuarioId}`)
+        const contentType = response.headers.get("content-type") || ""
+        const esJson = contentType.includes("application/json")
+        const data = esJson ? await response.json() : await response.text()
 
         if (!response.ok) {
-          throw new Error(data.error || "Error al obtener registros emocionales")
+          throw new Error(
+            esJson
+              ? data.error || "Error al obtener registros emocionales"
+              : "La API de registros emocionales no ha devuelto JSON. Revisa que el backend este levantado en http://localhost:3000."
+          )
+        }
+
+        if (!esJson) {
+          throw new Error("La respuesta de registros emocionales no es JSON valido.")
         }
 
         setRegistros(Array.isArray(data) ? data : [])

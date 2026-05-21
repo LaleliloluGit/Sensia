@@ -8,23 +8,28 @@ import InicioPage from './components/pages/2. inicio/InicioPage'
 import TestPage from './components/pages/4. test/TestPage'
 import DiarioPage from './components/pages/5. diario/DiarioPage'
 import TestResultado from './components/pages/4. test/TestResultado'
-
+import PerfilPersonalPage from './components/pages/7. perfil/PerfilPersonalPage'
+import ProtectedRoute from './components/common/ProtectedRoute'
 
 export default function App() {
   return (
     <Routes>
-      <Route path="/" element={<LayoutAccess form = 'login'/>} />
-      <Route path="/register" element={<LayoutAccess form = 'register' />} />
-      <Route path="/sensia" element={<Layout />} >
-        <Route index element={<InicioPage />} />
-        <Route path='registrar_emocion' element={<RegistrarEmocionPage />} />
-        <Route path='alexithimia_test' element={<TestPage />} />
-        <Route path='resultado_test' element={<TestResultado />} />
-        <Route path='diario_emocional' element={<DiarioPage />} />
-        <Route path='cursos' element={<CursosPage />} />
+      <Route path="/" element={<LayoutAccess form="login" />} />
+      <Route path="/register" element={<LayoutAccess form="register" />} />
+
+      <Route element={<ProtectedRoute />}>
+        <Route path="/sensia" element={<Layout />}>
+          <Route index element={<InicioPage />} />
+          <Route path="perfil_personal" element={<PerfilPersonalPage />} />
+          <Route path="registrar_emocion" element={<RegistrarEmocionPage />} />
+          <Route path="alexithimia_test" element={<TestPage />} />
+          <Route path="resultado_test" element={<TestResultado />} />
+          <Route path="diario_emocional" element={<DiarioPage />} />
+          <Route path="cursos" element={<CursosPage />} />
+        </Route>
       </Route>
+
       <Route path="*" element={<Error />} />
     </Routes>
   )
 }
-

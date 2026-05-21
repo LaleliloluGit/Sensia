@@ -30,6 +30,10 @@ export default function RegistrarEmocionPage() {
 
   // Al cargar el componente, se obtienen las emociones principales y las partes del cuerpo
   useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth", // o "auto" si no quieres animación
+    });
 
     const getEmocionesPrincipales = async () => {
       try {

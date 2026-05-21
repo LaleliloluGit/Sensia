@@ -4,7 +4,7 @@ import preguntas from "../../../data/alexitimiaPreguntas.json";
 import "../../../style/test_alexithimia.css";
 import PageTitle from "../../common/PageTitle";
 
-const OPCIONES = [
+const opcion = [
   { valor: 1, texto: "Totalmente en desacuerdo" },
   { valor: 2, texto: "Muy en desacuerdo" },
   { valor: 3, texto: "En desacuerdo" },
@@ -39,6 +39,24 @@ export default function TestPage() {
 
   const puntuacionTotal =
     respuestas.reduce((acc, item) => acc + item.valor, 0) / 2;
+
+
+  const getColor = (valor) => {
+    const colors = [
+      "rgb(186, 230, 253)", // azul pastel
+      "rgb(167, 243, 208)", // verde agua pastel
+      "rgb(153, 246, 228)", // turquesa claro
+      "rgb(196, 245, 220)", // verde menta suave
+      "rgb(224, 242, 254)", // azul muy suave
+      "rgb(255, 237, 213)", // transición melocotón
+      "rgb(255, 220, 190)",
+      "rgb(255, 205, 180)",
+      "rgb(255, 190, 165)",
+      "rgb(255, 179, 153)", // coral actual
+    ];
+
+    return colors[valor - 1];
+  };
 
   const seleccionarRespuesta = (valor, textoOpcion) => {
     if (!preguntaActual || enviando) return;
@@ -112,6 +130,7 @@ export default function TestPage() {
 
       const nivelData = await obtenerNivelAlexitimia(puntuacionTotal);
 
+
       const payload = {
         usuario_id: usuarioId,
         respuestas: respuestas.map((r) => r.valor).join(","),
@@ -152,6 +171,13 @@ export default function TestPage() {
       setEnviando(false);
     }
   };
+
+  useEffect(() => {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth", // o "auto" si no quieres animación
+      });
+    }, []);
 
   useEffect(() => {
     if (testTerminado && !testEnviado && !enviando) {
@@ -213,17 +239,18 @@ export default function TestPage() {
           </div>
 
           <div className="col-span-12 grid grid-cols-5 md:grid-cols-10 gap-3 mb-10">
-            {OPCIONES.map((opcion) => (
+            {opcion.map((op) => (
               <button
-                key={opcion.valor}
-                onClick={() => seleccionarRespuesta(opcion.valor, opcion.texto)}
+                key={op.valor}
+                onClick={() => seleccionarRespuesta(op.valor, op.texto)}
                 disabled={enviando}
-                className="py-4 rounded-xl font-bold text-lg shadow transition transform hover:scale-105 text-white disabled:opacity-50 disabled:cursor-not-allowed"
+                className="py-4 rounded-xl font-bold text-lg shadow transition transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
                 style={{
-                  background: `hsl(${(10 - opcion.valor) * 12}, 70%, 50%)`,
+                  background: getColor(op.valor),
+                  color: "444"
                 }}
               >
-                {opcion.valor}
+                {op.valor}
               </button>
             ))}
           </div>

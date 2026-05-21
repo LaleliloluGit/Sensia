@@ -1,5 +1,5 @@
 import argon2 from "argon2";
-// import jwt from 'jsonwebtoken';
+import jwt from 'jsonwebtoken';
 // import sendVerificationEmail from './nodemailer.js';
 
 import {
@@ -10,6 +10,8 @@ import {
   deleteUsuarioById,
 } from "../database/models/usuariosModel.js";
 
+
+
 export async function getUsuariosController(req, res) {
   try {
     const usuarios = await getUsuarios();
@@ -19,6 +21,11 @@ export async function getUsuariosController(req, res) {
     res.status(500).json({ error: "Error al obtener los usuarios" });
   }
 }
+
+
+
+
+
 
 export async function getUsuarioByUsernameController(req, res) {
   try {
@@ -33,6 +40,12 @@ export async function getUsuarioByUsernameController(req, res) {
     res.status(500).json({ error: "Error al obtener el usuario" });
   }
 }
+
+
+
+
+
+
 export async function getUsuarioByEmailController(req, res) {
   try {
     const { email } = req.params;
@@ -46,6 +59,11 @@ export async function getUsuarioByEmailController(req, res) {
     res.status(500).json({ error: "Error al obtener el usuario" });
   }
 }
+
+
+
+
+
 
 export async function loginUsuarioController(req, res) {
   try {
@@ -64,22 +82,23 @@ export async function loginUsuarioController(req, res) {
     if (!passwordValida) {
       return res
         .status(401)
-        .json({ error: "Contraseña incorrectos" });
+        .json({ error: "Contraseña incorrecta" });
     }
 
-    // const token = jwt.sign(
-    //     { id: usuario._id, username: usuario.username },
-    //     process.env.JWT_SECRET || 'tu_secreto_super_secreto',
-    //     { expiresIn: '5h' } // opcional
-    // );
+    const token = jwt.sign(
+        { id: usuario._id, username: usuario.username },
+        process.env.JWT_SECRET || 'tu_secreto_super_secreto',
+        { expiresIn: '5h' } // opcional
+    );
 
-    // return res.json({ usuario, token })
-    return res.json({ usuario });
+    return res.json({ usuario, token })
   } catch (err) {
     console.error("Error en el login:", err); // Log the error for debugging
     res.status(500).json({ error: "Error en el login" });
   }
 }
+
+
 
 
 export async function createUsuarioController(req, res) {

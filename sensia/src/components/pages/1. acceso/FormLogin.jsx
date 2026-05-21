@@ -10,15 +10,24 @@ import logo from "./../../../assets/logo_login.png"
  */
 export default function FormLogin() {
 
+    ///////////////////// ESTADOS ////////////////////
     const [formData, setFormData] = useState({
         username: "",
         password: ""
     })
     const navigate = useNavigate();
+
+    // Errores de servidor
     const [error, setError] = useState('');
+    // Errores de formulario
     const [campoError, setCampoError] = useState({});
 
+    const [showPassword, setShowPassword] = useState(false);
 
+
+
+
+    //////////////////// FUNCIONES ////////////////////
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData(prev => ({ ...prev, [name]: value }));
@@ -30,6 +39,9 @@ export default function FormLogin() {
         setError("");
     };
 
+
+
+    // Valida que los campos no esten vacios antes de enviar el formulario
     const validateAllFields = async () => {
         const newErrors = {};
 
@@ -47,10 +59,15 @@ export default function FormLogin() {
         return true;
     };
 
+
+
     const validateField = (value) => {
         if (!value.trim()) return "Este campo es obligatorio";
         return "";
     };
+
+
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -84,11 +101,7 @@ export default function FormLogin() {
                 // setUsuario(usuarioCompleto);
                 sessionStorage.setItem('usuario', JSON.stringify(usuarioCompleto));
                 sessionStorage.setItem('token', data.token);
-                if (usuarioCompleto) {
-                    navigate('/sensia');
-                } else {
-                    navigate('/verificacion');
-                }
+                navigate('/sensia');
             }
         } catch (err) {
 
@@ -96,6 +109,10 @@ export default function FormLogin() {
 
         }
     };
+
+    const handleRegister = () => {
+        navigate('/register');
+    }
 
 
     return (
@@ -108,14 +125,29 @@ export default function FormLogin() {
                     {campoError.username && <p className="text-sm text-red-500 col-span-2 pt-2 ">{campoError.username}</p>}
 
                 </div>
-                <div className="login_register_inputs">
-                    <input type="password" name="password" value={formData.password} onChange={handleChange} placeholder="password" />
-                    {campoError.password && <p className="text-sm text-red-500 col-span-2 pt-2 ">{campoError.password}</p>}
+                <div className="login_register_inputs password_input_container">
+                    <input
+                        type={showPassword ? "text" : "password"}
+                        name="password"
+                        value={formData.password}
+                        onChange={handleChange}
+                        placeholder="password"
+                    />
 
+                    <i
+                        className={`fa-solid ${showPassword ? "fa-eye-slash" : "fa-eye"} password_toggle_icon`}
+                        onClick={() => setShowPassword(prev => !prev)}
+                    ></i>
+
+                    {campoError.password && (
+                        <p className="text-sm text-red-500 col-span-2 pt-2">
+                            {campoError.password}
+                        </p>
+                    )}
                 </div>
                 <div className="login_register_buttons login_register_inputs">
                     <button type="submit">Acceder</button>
-                    <Link to="/register" className="button">Go to Register</Link>
+                    <button onClick={handleRegister}>Registrarse</button>
                 </div>
                 {error && <p className="text-red-600 col-span-2 text-center mt-2">{error}</p>}
             </form>

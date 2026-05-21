@@ -23,6 +23,12 @@ export default function DiarioPage() {
 
   // Cargamos los registros emocionales al montar el componente
   useEffect(() => {
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth", // o "auto" si no quieres animación
+    });
+
     const cargarDatos = async () => {
       try {
         const usuario = JSON.parse(sessionStorage.getItem("usuario"))
@@ -80,24 +86,26 @@ export default function DiarioPage() {
     <div className="min-h-screen w-screen px-4 py-8 relative">
 
       <div className="max-w-7xl mx-auto pr-4">
-        <PageTitle title="Diario emocional" h1="Revisa tus emociones registradas" h2="Aqui puedes revisar tus emociones, sentimientos y buscar por palabras clave" />
-        <div className="mi-header p-4">
 
-          <div className="rounded-2xl shadow-sm mb-6 flex flex-col md:flex-row gap-4">
+        {/* Cabecero */}
+        <PageTitle title="Diario emocional" h1="Revisa tus emociones registradas" h2="Aqui puedes revisar tus emociones, sentimientos y buscar por palabras clave" />
+        {/* FILTROS */}
+        <div className="mi-header p-6">
+          <div className="rounded-2xl bg-[#d2cad8]/35 border border-[#d2cad8] shadow-sm mb-8 p-4 grid grid-cols-1 md:grid-cols-3 gap-4 backdrop-blur-sm">
             <input
               type="text"
-              placeholder="Buscar..."
+              placeholder="Buscar por situación..."
               value={busquedaTexto}
               onChange={(e) => setBusquedaTexto(e.target.value)}
-              className="border p-2 rounded-lg flex-1"
+              className="md:col-span-2 w-full rounded-xl border border-[#d8d0de] bg-white/85 px-4 py-3 text-gray-700 outline-none transition focus:border-[#c3b8cb] focus:ring-2 focus:ring-[#d2cad8]/40"
             />
 
             <select
               value={filtroEmocion}
               onChange={(e) => setFiltroEmocion(e.target.value)}
-              className="border p-2 rounded-lg"
+              className="w-full rounded-xl border border-[#d8d0de] bg-white/85 px-4 py-3 text-gray-700 outline-none transition focus:border-[#c3b8cb] focus:ring-2 focus:ring-[#d2cad8]/40"
             >
-              <option value="">Todas</option>
+              <option value="">Todas las emociones</option>
               {listaEmociones.map((emocion, index) => (
                 <option key={index} value={emocion}>
                   {emocion}
@@ -106,45 +114,58 @@ export default function DiarioPage() {
             </select>
           </div>
 
+          {/* RESULTADOS */}
           {error ? (
-            <p className="text-red-500">{error}</p>
+            <p className="text-red-500 text-center font-medium">{error}</p>
           ) : registrosFiltrados.length === 0 ? (
-            <p>No hay registros</p>
+            <p className="text-center text-gray-500 py-10">
+              No hay registros que coincidan con la búsqueda.
+            </p>
           ) : (
-            <div className="space-y-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+              
               {registrosFiltrados.map((registro) => (
-                <div
+                <article
                   key={registro.id}
-                  className="shadow-sm rounded-2xl p-8 bg-transparent"
+                  className="rounded-3xl bg-[#f8f5fa] border border-[#c091dd] shadow-sm p-6 transition hover:shadow-md hover:-translate-y-1 hover:border-[#c3b8cb]"
                 >
-                  <div className="flex justify-between mb-2">
-                    <h3 className="text-xl font-bold">
-                      {registro.emocion_nombre}
-                    </h3>
-                    <span className="text-sm text-gray-500">
-                      {formatearFecha(registro.fecha_hora)}
-                    </span>
+                  <div className="flex items-start justify-between gap-4 mb-5">
+                    <div>
+                      <span className="text-sm text-gray-500">
+                        {formatearFecha(registro.fecha_hora)}
+                      </span>
+
+                      <h3 className="text-2xl font-bold mt-1 text-gray-800">
+                        {registro.emocion_nombre}
+                      </h3>
+                    </div>
+
+                    <div className="w-14 h-14 rounded-2xl bg-[#d2cad8] border border-[#c3b8cb] flex items-center justify-center font-bold text-[#5f5467]">
+                      {registro.intensidad}/10
+                    </div>
                   </div>
 
-                  <div className="flex gap-2 mb-3">
-                    <span className="bg-blue-100 px-2 py-1 rounded text-sm">
+                  <div className="flex flex-wrap gap-2 mb-5">
+                    <span className="px-3 py-1 rounded-full bg-gray-100 text-gray-700 text-sm font-medium border border-gray-200">
                       {registro.parte_cuerpo_nombre}
                     </span>
 
-                    <span className="bg-gray-100 px-2 py-1 rounded text-sm">
-                      Intensidad {registro.intensidad}/10
+                    <span className="px-3 py-1 rounded-full bg-gray-50 text-gray-600 text-sm font-medium border border-gray-200">
+                      Intensidad {registro.intensidad}
                     </span>
                   </div>
 
-                  <p className="text-gray-700">
-                    {registro.descripcion_situacion}
-                  </p>
-                </div>
+                  <div className="bg-white/60 rounded-2xl p-4 border border-gray-100">
+                    <p className="text-gray-700 leading-relaxed">
+                      {registro.descripcion_situacion || "Sin descripción registrada."}
+                    </p>
+                  </div>
+                </article>
               ))}
             </div>
           )}
         </div>
       </div>
-    </div>
+    </div >
   )
 }

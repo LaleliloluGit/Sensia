@@ -28,8 +28,8 @@ export default function CursoLista({
               className={`w-full text-left p-3 rounded-lg border transition
                 ${
                   activo
-                    ? "bg-indigo-500 text-white border-indigo-500"
-                    : "bg-white hover:bg-gray-50"
+                    ? "bg-indigo-500 border-indigo-500"
+                    : "bg-red-500 hover:bg-gray-50"
                 }`}
             >
               <div className="flex justify-between">

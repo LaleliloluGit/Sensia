@@ -1,12 +1,8 @@
 import { useEffect, useState } from "react";
 
-const TIEMPO = 25;
+const TIEMPO = 25
 
-/**
- * Componente que muestra el detalle de un curso y permite marcarlo como completado.
- * Recibe el curso seleccionado, si ya está completado, una función para marcarlo como completado y un estado de guardado.
- */
-function CursoDetalle({ curso, completado, onCompletar, guardando }) {
+export default function CursoDetalle({ curso, completado, onCompletar, guardando }) {
   const [segundos, setSegundos] = useState(TIEMPO);
 
   useEffect(() => {
@@ -14,7 +10,6 @@ function CursoDetalle({ curso, completado, onCompletar, guardando }) {
 
     setSegundos(TIEMPO);
 
-    // Inicia el conteo regresivo
     const interval = setInterval(() => {
       setSegundos((prev) => {
         if (prev <= 1) {
@@ -25,76 +20,108 @@ function CursoDetalle({ curso, completado, onCompletar, guardando }) {
       });
     }, 1000);
 
-    // Limpia el intervalo al desmontar o cambiar de curso
     return () => clearInterval(interval);
   }, [curso]);
 
   if (!curso) {
     return (
-      <div className="bg-white p-6 rounded-xl shadow">
+      <div className="mi-header-p rounded-3xl p-10 text-center text-gray-500">
         No hay curso seleccionado
       </div>
     );
   }
 
-//   El curso está bloqueado si aún quedan segundos o si ya se completó
   const bloqueado = segundos > 0 || completado;
 
   return (
-    <div className="rounded-xl mi-header-p">
-      <div className="flex gap-2">
-        <span className="bg-gray-200 px-2 py-1 rounded text-sm">
-          {curso.categoria}
-        </span>
-        <span className="bg-gray-200 px-2 py-1 rounded text-sm">
-          Parte {curso.parte}
-        </span>
+    <section className="mi-header-p rounded-3xl p-8 md:p-10 shadow-sm border border-white/60">
+      <div className="flex flex-col gap-8">
+
+        <div className="flex flex-wrap items-center gap-3">
+          <span className="rounded-full bg-white/70 border border-gray-200 px-4 py-1.5 text-sm font-medium text-gray-700">
+            {curso.categoria}
+          </span>
+
+          <span className="rounded-full bg-white/70 border border-gray-200 px-4 py-1.5 text-sm font-medium text-gray-700">
+            Parte {curso.parte}
+          </span>
+
+          {completado && (
+            <span className="rounded-full bg-green-50 border border-green-100 px-4 py-1.5 text-sm font-medium text-green-700">
+              Completado
+            </span>
+          )}
+        </div>
+
+        <div>
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-800 leading-tight mb-4">
+            {curso.nombre}
+          </h2>
+
+          <p className="text-lg text-gray-600 leading-relaxed max-w-4xl">
+            {curso.descripcion}
+          </p>
+        </div>
+
+        {curso.imagen_url && (
+          <div className="overflow-hidden rounded-3xl border border-gray-100 shadow-sm">
+            <img
+              src={curso.imagen_url}
+              alt={curso.nombre}
+              className="w-full h-72 md:h-96 object-cover"
+            />
+          </div>
+        )}
+
+        <div className="rounded-3xl bg-white/70 border border-gray-100 p-6 md:p-8 shadow-sm">
+          <h3 className="text-xl font-bold text-gray-800 mb-4">
+            Contenido del curso
+          </h3>
+
+          <p className="whitespace-pre-line text-gray-700 leading-8">
+            {curso.contenido}
+          </p>
+        </div>
+
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 rounded-2xl bg-white/50 border border-gray-100 p-5">
+          <div>
+            {!completado && segundos > 0 && (
+              <p className="text-gray-700 font-medium">
+                Podrás continuar en{" "}
+                <span className="font-bold">{segundos}s</span>
+              </p>
+            )}
+
+            {!completado && segundos === 0 && (
+              <p className="text-gray-700 font-medium">
+                Ya puedes marcar este curso como completado.
+              </p>
+            )}
+
+            {completado && (
+              <p className="text-green-700 font-medium">
+                Curso completado correctamente.
+              </p>
+            )}
+          </div>
+
+          <button
+            onClick={onCompletar}
+            disabled={bloqueado || guardando}
+            className={`px-6 py-3 rounded-xl font-bold transition shadow-sm ${
+              bloqueado || guardando
+                ? "bg-gray-200 text-gray-500 cursor-not-allowed"
+                : "bg-gray-800 text-white hover:bg-gray-900 hover:-translate-y-0.5"
+            }`}
+          >
+            {guardando
+              ? "Guardando..."
+              : completado
+              ? "Completado"
+              : "Marcar como completado"}
+          </button>
+        </div>
       </div>
-
-      <h2 className="text-xl font-bold">{curso.nombre}</h2>
-
-      <p className="text-gray-600">{curso.descripcion}</p>
-
-      {curso.imagen_url && (
-        <img
-          src={curso.imagen_url}
-          alt=""
-          className="w-full h-64 object-cover rounded-lg"
-        />
-      )}
-
-      <div className="bg-gray-100 p-4 rounded whitespace-pre-line">
-        {curso.contenido}
-      </div>
-
-      {!completado && segundos > 0 && (
-        <p className="text-orange-600">
-          Espera {segundos}s para continuar
-        </p>
-      )}
-
-      {completado && (
-        <p className="text-green-600">Curso completado</p>
-      )}
-
-      <button
-        onClick={onCompletar}
-        disabled={bloqueado || guardando}
-        className={`px-4 py-2 rounded text-white
-          ${
-            bloqueado
-              ? "bg-indigo-300"
-              : "bg-indigo-600 hover:bg-indigo-700"
-          }`}
-      >
-        {guardando
-          ? "Guardando..."
-          : completado
-          ? "Completado"
-          : "Marcar como completado"}
-      </button>
-    </div>
+    </section>
   );
 }
-
-export default CursoDetalle;

@@ -24,14 +24,35 @@ export default function GraficaTests() {
   const [error, setError] = useState("")
 
   useEffect(() => {
+    const usuarioGuardado = sessionStorage.getItem("usuario")
+    const usuario = usuarioGuardado ? JSON.parse(usuarioGuardado) : null
+    const usuarioId = usuario?.id
+
     const getTests = async () => {
+      if (!usuarioId) {
+        setError("No se ha encontrado el usuario logueado")
+        setLoading(false)
+        return
+      }
+
       try {
         setLoading(true)
-        const response = await fetch("http://localhost:3000/sensia/registros_test/todos")
-        const data = await response.json()
+        setError("")
+        const response = await fetch(`http://localhost:3000/sensia/registros_test/usuario/${usuarioId}`)
+        const contentType = response.headers.get("content-type") || ""
+        const esJson = contentType.includes("application/json")
+        const data = esJson ? await response.json() : await response.text()
 
         if (!response.ok) {
-          throw new Error(data.error || "Error al obtener registros de test")
+          throw new Error(
+            esJson
+              ? data.error || "Error al obtener registros de test"
+              : "La API de registros test no ha devuelto JSON. Si acabas de crear esta ruta, reinicia el backend."
+          )
+        }
+
+        if (!esJson) {
+          throw new Error("La respuesta de registros test no es JSON valido.")
         }
 
         setTests(Array.isArray(data) ? data : [])

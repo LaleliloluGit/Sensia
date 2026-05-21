@@ -21,6 +21,11 @@ function CursosPage() {
   // Cargar cursos y progreso del usuario al montar el componente
   useEffect(() => {
 
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth", // o "auto" si no quieres animación
+    });
+    
     const cargarDatos = async () => {
 
       try {

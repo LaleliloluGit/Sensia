@@ -5,6 +5,14 @@ export async function getRegistrosTests() {
   return rows;
 }
 
+export async function getRegistrosTestsByUserId(id) {
+  const [rows] = await db.execute(
+    "SELECT * FROM registros_test WHERE usuario_id = ? ORDER BY id DESC",
+    [id],
+  );
+  return rows;
+}
+
 export async function createRegistroTest(
   usuario_id,
   respuestas,

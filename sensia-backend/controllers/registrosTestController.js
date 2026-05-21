@@ -4,6 +4,7 @@
 
 import {
   getRegistrosTests,
+  getRegistrosTestsByUserId,
   createRegistroTest,
   deleteRegistroTestById,
 } from "../database/models/registrosTestsModel.js";
@@ -15,6 +16,17 @@ export async function getRegistrosTestsController(req, res) {
   } catch (err) {
     console.error("Error al obtener los registros tests:", err);
     res.status(500).json({ error: "Error al obtener los registros tests" });
+  }
+}
+
+export async function getRegistrosTestsByUserIdController(req, res) {
+  try {
+    const { id } = req.params;
+    const registros = await getRegistrosTestsByUserId(id);
+    res.json(registros);
+  } catch (err) {
+    console.error("Error al obtener los registros tests del usuario:", err);
+    res.status(500).json({ error: "Error al obtener los registros tests del usuario" });
   }
 }
 
