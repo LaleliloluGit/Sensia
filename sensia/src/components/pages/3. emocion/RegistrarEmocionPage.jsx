@@ -125,7 +125,7 @@ export default function RegistrarEmocionPage() {
         {/* Header */}
         <PageTitle
           title="Registrar emociones"
-          h1="Registra lo que estas sintiendo"
+          h1="Registra lo que estás sintiendo"
           h2="Explora la ruleta de emociones y completa tu registro emocional seleccionando la emoción que mejor describa lo que sientes en este momento."
         />
 

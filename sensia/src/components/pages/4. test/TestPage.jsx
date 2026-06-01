@@ -43,16 +43,16 @@ export default function TestPage() {
 
   const getColor = (valor) => {
     const colors = [
-      "rgb(186, 230, 253)", // azul pastel
-      "rgb(167, 243, 208)", // verde agua pastel
-      "rgb(153, 246, 228)", // turquesa claro
-      "rgb(196, 245, 220)", // verde menta suave
-      "rgb(224, 242, 254)", // azul muy suave
-      "rgb(255, 237, 213)", // transición melocotón
-      "rgb(255, 220, 190)",
-      "rgb(255, 205, 180)",
-      "rgb(255, 190, 165)",
       "rgb(255, 179, 153)", // coral actual
+      "rgb(255, 190, 165)",
+      "rgb(255, 205, 180)",
+      "rgb(255, 220, 190)",
+      "rgb(255, 237, 213)", // transición melocotón
+      "rgb(224, 242, 254)", // azul muy suave
+      "rgb(186, 245, 253)", // azul pastel
+      "rgb(184, 252, 238)", // turquesa claro
+      "rgb(179, 255, 216)", // verde menta suave
+      "rgb(183, 255, 189)", // verde agua pastel
     ];
 
     return colors[valor - 1];
@@ -229,11 +229,11 @@ export default function TestPage() {
           </div>
 
           <div className="col-span-12 flex justify-between text-sm md:text-base mb-3 px-2">
-            <span className="font-medium text-green-600">
+            <span className="font-medium text-red-600">
               1 · Totalmente en desacuerdo
             </span>
 
-            <span className="font-medium text-red-600">
+            <span className="font-medium text-green-600">
               10 · Totalmente de acuerdo
             </span>
           </div>

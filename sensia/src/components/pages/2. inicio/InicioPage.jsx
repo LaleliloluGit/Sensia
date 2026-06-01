@@ -25,7 +25,7 @@ export default function InicioPage() {
         <PageTitle
           title="Inicio"
           h1="Explora el mundo emocional con Sensia"
-          h2="Adentrate para comprender mejor los sentimientos, las emociones, la alexitimia y el cuidado del bienestar emocional."
+          h2="Adéntrate para comprender mejor tus sentimientos, tus emociones, la alexitimia y el cuidado del bienestar emocional."
         />
 
         <section className="grid grid-cols-12 gap-6 mb-8">
@@ -39,10 +39,10 @@ export default function InicioPage() {
                   Entender lo que sientes es el primer paso para cuidarte mejor
                 </h2>
                 <p className="text-slate-600 leading-relaxed mb-4">
-                  Las emociones suelen aparecer como respuestas inmediatas ante lo que vivimos. Los sentimientos, en cambio, son experiencias mas elaboradas que construimos a partir de esas emociones, nuestros pensamientos y nuestra historia personal.
+                  Las emociones suelen aparecer como respuestas inmediatas ante lo que vivimos. Los sentimientos, en cambio, son experiencias más elaboradas que construimos a partir de esas emociones, nuestros pensamientos y nuestra historia personal.
                 </p>
                 <p className="text-slate-600 leading-relaxed">
-                  Aprender a diferenciarlos ayuda a poner nombre a lo que ocurre dentro de ti, reconocer patrones y tomar decisiones con mas claridad.
+                  Aprender a diferenciarlos ayuda a poner nombre a lo que ocurre dentro de ti, reconocer patrones y tomar decisiones con más claridad.
                 </p>
               </div>
 
@@ -61,7 +61,7 @@ export default function InicioPage() {
                 Cuando identificar o expresar emociones cuesta
               </h2>
               <p className="text-slate-600 leading-relaxed mb-5">
-                No significa ausencia de emociones, sino dificultad para traducirlas en palabras o comprenderlas con precision. Muchas personas pueden experimentar sensaciones intensas en su interior, pero les resulta complicado identificar exactamente que estan sintiendo, diferenciar una emocion de otra o expresar con claridad lo que les ocurre.
+                No significa ausencia de emociones, sino dificultad para traducirlas en palabras o comprenderlas con precisión. Muchas personas pueden experimentar sensaciones intensas en su interior, pero les resulta complicado identificar exactamente qué estan sintiendo, diferenciar una emocion de otra o expresar con claridad lo que les ocurre.
               </p>
               <button onClick={handleTest}
                 className="inline-flex rounded-2xl border border-slate-200 bg-white px-5 py-3 font-semibold text-slate-800 hover:-translate-y-1 transition"
@@ -78,13 +78,13 @@ export default function InicioPage() {
         <section className="grid grid-cols-12 gap-6 mb-8">
           <article className="col-span-12 md:col-span-5 mi-header">
             <p className="text-sm uppercase tracking-widest text-slate-400 mb-3">
-              Senales frecuentes
+              Señales frecuentes
             </p>
             <h2 className="text-2xl font-bold text-slate-900 mb-4">
-              Que observar
+              Qué observar
             </h2>
             <p className="text-slate-600 leading-relaxed">
-              Confusion al hablar de emociones, dificultad para diferenciar entre sensaciones fisicas y estados emocionales, o tendencia a describir solo hechos externos.
+              Confusión al hablar de emociones, dificultad para diferenciar entre sensaciones físicas y estados emocionales, o tendencia a describir solo hechos externos.
             </p>
           </article>
 
@@ -99,7 +99,7 @@ export default function InicioPage() {
                   Autoconocimiento
                 </p>
                 <h2 className="text-2xl font-bold text-slate-900 mb-4">
-                  Practicas utiles
+                  Prácticas útiles
                 </h2>
                 <p className="text-slate-600 leading-relaxed">
                   Registrar lo que sientes, revisar tu cuerpo, identificar el contexto y poner palabras sencillas a cada experiencia puede mejorar la conciencia emocional poco a poco.
@@ -120,7 +120,7 @@ export default function InicioPage() {
                   Sigue profundizando en tu mundo emocional
                 </h2>
                 <p className="text-slate-600 leading-relaxed">
-                  Sensia tambien puede acompanarte con recursos practicos para entender mejor tus reacciones emocionales y construir un lenguaje interno mas claro.
+                  Sensia también puede acompañarte con recursos prácticos para entender mejor tus reacciones emocionales y construir un lenguaje interno más claro.
                 </p>
               </div>
 
