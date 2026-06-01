@@ -25,22 +25,24 @@ export default function CursoLista({
             <button
               key={curso.id}
               onClick={() => onSeleccionarCurso(curso)}
-              className={`w-full text-left p-3 rounded-lg border transition
+              className={`w-full text-left px-0 mx-0 rounded-lg border transition
                 ${
                   activo
                     ? "bg-indigo-500 border-indigo-500"
                     : "bg-red-500 hover:bg-gray-50"
                 }`}
             >
-              <div className="flex justify-between">
-                <div>
-                  <p className="font-medium">{curso.nombre}</p>
-                  <p className="text-xs opacity-70">
-                    {curso.categoria} - Parte {curso.parte}
+              <div className="flex justify-between items-center ">
+                <div className="flex justify-center items-center">
+                  <p className="text-sm opacity-70 ">
+                    {curso.categoria.toUpperCase()[0] + curso.categoria.slice(1) }
+                  </p>
+                  <p className="text-sm opacity-70">
+                    - {curso.parte}/3
                   </p>
                 </div>
 
-                <span>
+                <span className="ml-3">
                   {completado ? "✅" : "📘"}
                 </span>
               </div>
