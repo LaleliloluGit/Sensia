@@ -9,7 +9,7 @@ function Header() {
 
   const links = [
     { to: "/sensia", label: "Inicio" },
-    { to: "/sensia/registrar_emocion", label: "Registrar emocion" },
+    { to: "/sensia/registrar_emocion", label: "Registrar emoción" },
     { to: "/sensia/alexithimia_test", label: "Test Alexitimia" },
     { to: "/sensia/diario_emocional", label: "Diario emociones" },
     { to: "/sensia/cursos", label: "Cursos" },

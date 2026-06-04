@@ -97,7 +97,7 @@ export default function GraficaRegistros() {
 
         <div className="flex gap-3">
           <div className="rounded-2xl border-primario px-4 py-3 min-w-27.5">
-            <p className="text-xs text-slate-500 mb-1">Total</p>
+            <p className="text-xs text-slate-500 mb-1">Total mensual</p>
             <p className="text-2xl font-bold text-slate-800">{totalRegistros}</p>
           </div>
 

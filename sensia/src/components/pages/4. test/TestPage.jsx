@@ -204,7 +204,7 @@ export default function TestPage() {
     <div className="min-h-screen w-screen px-4 py-8 relative">
 
       <div className="max-w-7xl mx-auto pr-4">
-        <PageTitle title="Test Alexithimia" h1="Realiza el test de Alexitimia" h2="Responde las siguientes preguntas para conocer tu nivel de alexitimia" />
+        <PageTitle title="Test Alexitimia" h1="Realiza el test de Alexitimia" h2="Responde las siguientes preguntas para conocer tu nivel de alexitimia" />
 
 
         <div className="col-span-12 grid border-gray-600 border rounded-2xl mi-header" >

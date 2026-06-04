@@ -136,7 +136,7 @@ export default function RegistrarEmocionPage() {
         />
 
         {/* Muestreo de emociones si aun no tenemos la emocion final */}
-        <div className="col-span-12 grid grid-cols-12 gap-8 justify-center">
+        <div className="col-span-12 grid grid-cols-12 gap-8 justify-center [&>*]:col-span-12 md:[&>*]:col-span-6 lg:[&>*]:col-span-4">
 
           {emocionesSeleccionadas.length < 3 &&
 

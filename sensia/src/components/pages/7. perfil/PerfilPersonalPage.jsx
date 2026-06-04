@@ -21,7 +21,7 @@ export default function PerfilPersonalPage() {
         <PageTitle
           title="Perfil personal"
           h1={nombreCompleto || usuario?.username || "Tu espacio personal"}
-          h2="Consulta tu informacion personal, revisa tu actividad reciente y accede rapido a las herramientas principales de Sensia."
+          h2="Consulta tu información personal, revisa tu actividad reciente y accede cómodamente a las herramientas principales de Sensia."
         />
 
         <section className="grid grid-cols-12 gap-6 mb-8">
@@ -61,7 +61,7 @@ export default function PerfilPersonalPage() {
               Sigue tu proceso emocional
             </h2>
             <p className="text-slate-600 leading-relaxed mb-6">
-              Desde aqui puedes registrar emociones, consultar tu diario, revisar tus tests y continuar aprendiendo con los cursos disponibles.
+              Desde aquí puedes registrar emociones, consultar tu diario, revisar tus tests y continuar aprendiendo con los cursos disponibles.
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

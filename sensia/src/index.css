@@ -126,7 +126,7 @@ button:focus-visible {
       rgba(255, 255, 255, 0.722), 
       rgba(255, 179, 153, 0.79),
       rgba(255, 255, 255, 0.707));
-  animation: girarColor 45s ease-in-out infinite alternate;
+  animation: girarColor 180s ease-in-out infinite alternate;
 }
 
 .mi-header {

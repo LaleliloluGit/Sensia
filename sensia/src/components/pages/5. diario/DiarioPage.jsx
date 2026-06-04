@@ -88,7 +88,7 @@ export default function DiarioPage() {
       <div className="max-w-7xl mx-auto pr-4">
 
         {/* Cabecero */}
-        <PageTitle title="Diario emocional" h1="Revisa tus emociones registradas" h2="Aqui puedes revisar tus emociones, sentimientos y buscar por palabras clave" />
+        <PageTitle title="Diario emocional" h1="Revisa tus emociones registradas" h2="Aquí puedes revisitar tus registros de emociones y sentimientos y filtrarlos por palabras clave" />
         {/* FILTROS */}
         <div className="mi-header p-6">
           <div className="rounded-2xl bg-[#d2cad8]/35 border border-[#d2cad8] shadow-sm mb-8 p-4 grid grid-cols-1 md:grid-cols-3 gap-4 backdrop-blur-sm">
